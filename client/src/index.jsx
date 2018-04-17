@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
 
 import Login from './components/login.jsx';
 import Main from './components/main.jsx';
@@ -13,7 +14,8 @@ class App extends React.Component {
   constructor(props) {
   	super(props)
   	this.state = {
-      view: 'login'
+      view: 'login',
+      loggedIn: true
     }
     this.renderView = this.renderView.bind(this);
   }
@@ -35,9 +37,25 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        {this.renderView()}
+        <div className="nav">
+          {
+            (this.state.loggedIn)
+              ? <div>
+                  <p>Home</p>
+                  <p>Scheduled Messages</p>
+                  <p>Log Out</p>
+                </div>
+              : <div>
+                  <p>Log In</p>
+                  <p>Sign Up</p>
+                </div>
+          }
+        </div>
+        <div>
+          {this.renderView()}
+        </div>
       </div>
-    )
+    );
   }
 }
 

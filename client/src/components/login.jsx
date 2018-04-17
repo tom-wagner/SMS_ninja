@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
 
 class Login extends React.Component {
   constructor(props) {

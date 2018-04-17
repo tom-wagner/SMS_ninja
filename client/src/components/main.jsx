@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
 
 class Main extends React.Component {
   constructor(props) {

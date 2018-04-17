@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
 
-class SignUp extends React.Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
