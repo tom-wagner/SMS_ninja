@@ -10,7 +10,7 @@ var app = express();
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
-app.post('/sendSMS', function(req, res) {
+app.post('/SMS', function(req, res) {
   console.log('typeof', typeof req.query.recipient);
   twilio.sendSMS(req.query.msg, req.query.recipient, twilioNumber).then((result, err) => {
     if (result.errorCode) {
@@ -18,7 +18,7 @@ app.post('/sendSMS', function(req, res) {
     } else {
       res.status(200).send(result.body);
     }
-  })
+  });
 });
 
 app.listen(process.env.PORT || 3000, function() {
