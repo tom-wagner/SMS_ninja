@@ -1,4 +1,10 @@
-const {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+
+// overwrite if deployed
+acctSID = process.env.acctSID || acctSID;
+authToken = process.env.testSID || testSID;
+testToken = process.env.testToken || testToken;
+twilioNumber = process.env.twilioNumber || twilioNumber;
 
 const twilio = require('twilio');
 
