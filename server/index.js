@@ -11,14 +11,16 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/sendSMS', function(req, res) {
-  console.log(req.query.msg);
-  console.log(twilioNumber);
-  twilio.sendSMS(req.query.msg, '+16123603573', twilioNumber).then(result => {
-    console.log(result);
-    res.status(200).send('I think it worked!');
+  console.log('typeof', typeof req.query.recipient);
+  twilio.sendSMS(req.query.msg, req.query.recipient, twilioNumber).then((result, err) => {
+    if (result.errorCode) {
+      res.status(500).send(`Server error: ${result.errorMessage}, please try again later.`)
+    } else {
+      res.status(200).send(result.body);
+    }
   })
 });
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
