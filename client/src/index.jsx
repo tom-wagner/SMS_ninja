@@ -38,7 +38,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="nav">
-          <Navbar inverse fluid fixedTop>
+          <Navbar fluid fixedTop>
             <Navbar.Header>
               <Navbar.Brand>
                 SMS Ninja
@@ -71,7 +71,7 @@ class App extends React.Component {
             </Navbar.Collapse>
           </Navbar>
         </div>
-        <div>
+        <div className="main">
           {this.renderView()}
         </div>
       </div>

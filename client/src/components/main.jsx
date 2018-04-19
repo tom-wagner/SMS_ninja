@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
 
-class Main extends React.Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {  };

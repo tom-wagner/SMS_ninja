@@ -1,0 +1,11 @@
+
+/* style navbar */
+.navbar,
+.navbar-default {
+    background-image: linear-gradient(to bottom, rgb(131, 190, 245) 0, #4ea3f3 100%) !important; /* override background image gradient w/ flat color */
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-brand {
+  color: white !important;
+}

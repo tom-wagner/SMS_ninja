@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
 
-class Login extends React.Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="login">
         This is login!!
       </div>
     );
