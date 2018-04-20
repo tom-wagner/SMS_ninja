@@ -33,6 +33,7 @@ class App extends React.Component {
       loggedIn: false
     }
     this.renderView = this.renderView.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
   renderView() {
@@ -43,10 +44,27 @@ class App extends React.Component {
     } else if (view === 'signUp') {
       return <SignUp />;
     } else if (view === 'main') {
-      return <Main />;
+      return <Main sendMessage={this.sendMessage} />;
     } else if (view === 'messages') {
       return <Messages />;
     }
+  }
+
+  sendMessage(msgData) {
+    console.log('firing!!');
+    var options = {
+      method: 'POST',
+      url: '/SMS',
+      params: msgData
+    }
+    axios(options).then(result => {
+      console.log(result);
+
+      // alert user of success
+      window.alert('message sent successfully!');
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   render () {
@@ -64,21 +82,21 @@ class App extends React.Component {
               { // TOGGLE NAVBAR BASED ON WHETHER USER IS LOGGED IN
                 (this.state.loggedIn)
                 ? <Nav pullRight>
-                    <NavItem eventKey={1}>
+                    <NavItem eventKey={1} onClick={() => { this.setState({view: 'main'})}}>
                       Home
                     </NavItem>
-                    <NavItem eventKey={2}>
+                    <NavItem eventKey={2} onClick={() => { this.setState({view: 'messages'})}}>>
                       Scheduled Messages
                     </NavItem>
-                    <NavItem eventKey={3}>
+                    <NavItem eventKey={3} onClick={() => { this.setState({view: 'login'})}}>
                       Log Out
                     </NavItem>
                   </Nav>
                 : <Nav pullRight>
-                    <NavItem eventKey={4}>
+                    <NavItem eventKey={4} onClick={() => { this.setState({view: 'signUp'})}}>
                       Sign Up
                     </NavItem>
-                    <NavItem eventKey={5}>
+                    <NavItem eventKey={5} onClick={() => { this.setState({view: 'login'})}}>
                       Log In
                     </NavItem>
                   </Nav>
