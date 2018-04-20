@@ -2,7 +2,7 @@ var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.
 
 // overwrite if deployed
 acctSID = process.env.acctSID || acctSID;
-authToken = process.env.testSID || testSID;
+authToken = process.env.testSID || authToken;
 testToken = process.env.testToken || testToken;
 twilioNumber = process.env.twilioNumber || twilioNumber;
 

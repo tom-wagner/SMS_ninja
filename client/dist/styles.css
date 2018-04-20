@@ -9,3 +9,8 @@
 .navbar-default .navbar-brand {
   color: white !important;
 }
+
+.main {
+  padding-top: 65px; /* 50px to push below navbar, 15px to match padding-left*/
+  padding-left: 15px; /*15px to match padding on Navbar title*/
+}

@@ -1,7 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+
+// REDUX:
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { BrowserRouter } from 'react-router-dom';
+import {} from 'react-router-redux';
+
 import axios from 'axios';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
+
+
+// REDUX:
+// import reducers from './reducers/all_reducers.js';
+// const reducer = combineReducers({
+//   ...reducers,
+//   routing: routeReducer
+// });
 
 import Login from './components/login.jsx';
 import Main from './components/main.jsx';
@@ -14,7 +29,7 @@ class App extends React.Component {
   constructor(props) {
   	super(props)
   	this.state = {
-      view: 'login',
+      view: 'main',
       loggedIn: false
     }
     this.renderView = this.renderView.bind(this);
@@ -79,4 +94,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
