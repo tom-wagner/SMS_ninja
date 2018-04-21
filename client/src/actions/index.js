@@ -9,7 +9,6 @@ import {
   NAV_TO_MESSAGES
 } from '../action_types.js';
 
-
 export const fetchMessages = username => {
   return {
     type: DID_GET_MESSAGES,
@@ -24,16 +23,28 @@ export const handleScheduleMessageSubmit = (username, phoneNumber, message, date
   };
 };
 
-export const handleLogin = (username, passwordInput) => {
+export const handleSignUp = (username, email, passwordInput, phoneNumber) => {
   return {
-    type: DID_LOG_IN,
+    type: DID_SIGN_UP,
     payload: null
   };
 };
 
-export const handleSignUp = (username, email, passwordInput, phoneNumber) => {
+export const handleLogin = (values) => {
+  console.log('username and password: ', values);
+
+  // To do later:
+  // authenticate user
+  // fetch their scheduled messages
+  // set up session
+  // store phone number in state
+
+  // To do now:
+  // flip isLoggedIn to true
+  // render main page
+
   return {
-    type: DID_SIGN_UP,
+    type: DID_LOG_IN,
     payload: null
   };
 };
@@ -63,31 +74,3 @@ export const changeView = (view) => {
     console.error('ERROR, NO MATCHING VIEW FOUND');
   }
 };
-
-// export const navToLogin = () => {
-//   return {
-//     type: NAV_TO_LOG_IN,
-//     view: null,
-//   };
-// };
-
-// export const navToSignUp = () => {
-//   return {
-//     type: NAV_TO_SIGN_UP,
-//     view: null,
-//   };
-// };
-
-// export const navToMain = () => {
-//   return {
-//     type: NAV_TO_MAIN,
-//     view: null,
-//   };
-// };
-
-// export const navToMessages = () => {
-//   return {
-//     type: NAV_TO_MESSAGES,
-//     view: null,
-//   };
-// };

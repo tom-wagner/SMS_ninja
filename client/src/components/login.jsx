@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/index.js';
+import LoginForm from '../forms/login.jsx';
 
 class Login extends Component {
 
@@ -24,7 +25,7 @@ class Login extends Component {
             {/* <input className="create-input" type="text" onChange={this.handleChange.bind(this, 'password')} value={this.state.formData.password} ></input><br/><br/> */}
             {/* <button className="create-submit-button" type="submit">Log In</button> */}
           {/* </form> */}
-          This is a login div!!
+          <LoginForm />
       </div>
     );
   }
