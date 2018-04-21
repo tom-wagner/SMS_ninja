@@ -20,40 +20,39 @@ class App extends Component {
   //   this.sendMessage = this.sendMessage.bind(this);
   // }
 
-  renderView() {
-    console.log('running!!');
-    const view = 'login'; // this.props.view; // compared to this.state.view previously
-
-    if (view === 'login') {
-      return <Login />;
-    } else if (view === 'signUp') {
-      return <SignUp />;
-    } else if (view === 'main') {
-      return <Main sendMessage={this.sendMessage} />;
-    } else if (view === 'messages') {
-      return <Messages />;
-    }
-  }
-
+  
   // NEED TO CONVERT TO AN ACTION:
   // sendMessage(msgData) {
-  //   console.log('firing!!');
-  //   var options = {
-  //     method: 'POST',
-  //     url: '/SMS',
-  //     params: msgData
-  //   }
-  //   axios(options).then(result => {
-  //     console.log(result);
+    //   console.log('firing!!');
+    //   var options = {
+      //     method: 'POST',
+      //     url: '/SMS',
+      //     params: msgData
+      //   }
+      //   axios(options).then(result => {
+        //     console.log(result);
+        
+        //     // alert user of success
+        //     window.alert('message sent successfully!');
+        //   }).catch(err => {
+          //     console.log(err);
+          //   });
+          // }
+          
+  render() {
+    let divToRender = null;
+    let view = this.props.view;
 
-  //     // alert user of success
-  //     window.alert('message sent successfully!');
-  //   }).catch(err => {
-  //     console.log(err);
-  //   });
-  // }
+    if (view === 'login') {
+      divToRender = <Login />;
+    } else if (view === 'signUp') {
+      divToRender = <SignUp />;
+    } else if (view === 'main') {
+      divToRender = <Main />;
+    } else if (view === 'messages') {
+      divToRender = <Messages />;
+    }
 
-  render () {
     return (
       <div>
         <div className="nav">
@@ -96,8 +95,8 @@ class App extends Component {
           </Navbar>
         </div>
         <div className="main">
-          This is a div within app.jsx!!
-          {/* {this.renderView()} */}
+          {/* This is a div within app.jsx!! */}
+          {divToRender}
         </div>
       </div>
     );
