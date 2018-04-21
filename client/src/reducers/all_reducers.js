@@ -14,6 +14,8 @@ export function username(state = '', action) {
   switch (action.type) {
     case DID_LOG_IN:
       return action.payload.username;
+    case DID_LOG_OUT:
+      return '';
     default:
       return state;
   }
@@ -21,8 +23,12 @@ export function username(state = '', action) {
 
 export function phoneNumber(state = '', action) {
   // LATER: LOOK UP PHONE NUMBER FROM DATABASE AT LOGIN
-  
-  return state;
+  switch (action.type) {
+    case DID_LOG_OUT:
+      return '';
+    default:
+      return state;
+  }
 }
 
 export function toggleLogIn(state = false, action) {
@@ -37,11 +43,21 @@ export function toggleLogIn(state = false, action) {
 }
 
 export function scheduledMessages(state = [], action) {
-  return state;
+  switch (action.type) {
+    case DID_LOG_OUT:
+      return [];
+    default:
+      return state;
+  }
 }
 
 export function previouslySentMessages(state = [], action) {
-  return state;
+  switch (action.type) {
+    case DID_LOG_OUT:
+      return [];
+    default:
+      return state;
+  }
 }
 
 export function view(state = 'login', action) {

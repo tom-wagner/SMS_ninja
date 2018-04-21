@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import { connect } from 'react-redux';
-import { changeView } from '../actions/index.js'
+import { changeView, toggleLogIn, handleLogOut } from '../actions/index.js'
 
 // import AnyComponent from './components/filename.jsx'
 import Login from './login.jsx';
@@ -33,6 +33,8 @@ class App extends Component {
     let divToRender = null;
     let view = this.props.view;
 
+    const { changeView, handleLogOut, isLoggedIn } = this.props;
+
     if (view === 'login') {
       divToRender = <Login />;
     } else if (view === 'signUp') {
@@ -55,28 +57,23 @@ class App extends Component {
             </Navbar.Header>
             <Navbar.Collapse>
               { // TOGGLE NAVBAR BASED ON WHETHER USER IS LOGGED IN
-                (this.props.isLoggedIn)
+                (isLoggedIn)
                 ? <Nav pullRight>
-                    {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'main'} onClick={() => { this.props.changeView('main') }}>
+                    <NavItem eventKey={'main'} onClick={() => { changeView('main') }}>
                       Home
                     </NavItem>
-                    {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'messages'} onClick={() => { this.props.changeView('messages') }}>
+                    <NavItem eventKey={'messages'} onClick={() => { changeView('messages') }}>
                       Scheduled Messages
                     </NavItem>
-                    {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'login'} onClick={() => { this.props.changeView('login') }}>
+                    <NavItem eventKey={'login'} onClick={() => { handleLogOut() }}>
                       Log Out
                     </NavItem>
                   </Nav>
                 : <Nav pullRight>
-                    {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'signUp'} onClick={() => { this.props.changeView('signUp') }}>
+                    <NavItem eventKey={'signUp'} onClick={() => { changeView('signUp') }}>
                       Sign Up
                     </NavItem>
-                    {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'login'} onClick={() => { this.props.changeView('login') }}>
+                    <NavItem eventKey={'login'} onClick={() => { changeView('login') }}>
                       Log In
                     </NavItem>
                   </Nav>
@@ -105,7 +102,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeView: (view) => dispatch(changeView(view))
+    changeView: (view) => dispatch(changeView(view)),
+    handleLogOut: () => {
+      dispatch(handleLogOut());
+      dispatch(changeView('login'));
+    }
   };
 };
 

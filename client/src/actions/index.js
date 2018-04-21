@@ -3,6 +3,7 @@ import {
   DID_SCHEDULE_MESSAGE,
   DID_SIGN_UP,
   DID_LOG_IN,
+  DID_LOG_OUT,
   NAV_TO_LOG_IN,
   NAV_TO_SIGN_UP,
   NAV_TO_MAIN,
@@ -25,6 +26,8 @@ export const handleScheduleMessageSubmit = (values) => { // username, phoneNumbe
 
 export const handleSignUp = (values) => {
   console.log('values from sign up form: ', values);
+  // TO DO LATER: Add user to database
+
   return {
     type: DID_SIGN_UP,
     payload: true
@@ -34,7 +37,7 @@ export const handleSignUp = (values) => {
 export const handleLogin = (values) => {
   console.log('username and password: ', values);
 
-  // To do later:
+  // TO DO LATER:
   // authenticate user
   // fetch their scheduled messages
   // set up session
@@ -45,6 +48,12 @@ export const handleLogin = (values) => {
   return {
     type: DID_LOG_IN,
     payload: values
+  };
+};
+
+export const handleLogOut = () => {
+  return {
+    type: DID_LOG_OUT,
   };
 };
 
