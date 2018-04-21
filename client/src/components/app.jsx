@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import { connect } from 'react-redux';
-import { fetchMessages, changeView } from '../actions/index.js'
+import { changeView } from '../actions/index.js'
 
 // import AnyComponent from './components/filename.jsx'
 import Login from './login.jsx';
@@ -10,16 +10,6 @@ import Messages from './messages.jsx';
 import SignUp from './signup.jsx';
 
 class App extends Component {
-  // constructor(props) {
-  // 	super(props)
-  // 	this.state = {
-  //     view: 'main',
-  //     loggedIn: false
-  //   }
-  //   this.renderView = this.renderView.bind(this);
-  //   this.sendMessage = this.sendMessage.bind(this);
-  // }
-
   
   // NEED TO CONVERT TO AN ACTION:
   // sendMessage(msgData) {
@@ -68,25 +58,25 @@ class App extends Component {
                 (this.props.isLoggedIn)
                 ? <Nav pullRight>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'main'} onClick={() => { this.setState({view: 'main'})}}>
+                    <NavItem eventKey={'main'} onClick={() => { this.props.changeView('main') }}>
                       Home
                     </NavItem>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'messages'} onClick={() => { this.setState({view: 'messages'})}}>>
+                    <NavItem eventKey={'messages'} onClick={() => { this.props.changeView('messages') }}>
                       Scheduled Messages
                     </NavItem>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'login'} onClick={() => { this.setState({view: 'login'})}}>
+                    <NavItem eventKey={'login'} onClick={() => { this.props.changeView('login') }}>
                       Log Out
                     </NavItem>
                   </Nav>
                 : <Nav pullRight>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'signUp'} onClick={() => { this.setState({view: 'signUp'})}}>
+                    <NavItem eventKey={'signUp'} onClick={() => { this.props.changeView('signUp') }}>
                       Sign Up
                     </NavItem>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={'login'} onClick={() => { this.setState({view: 'login'})}}>
+                    <NavItem eventKey={'login'} onClick={() => { this.props.changeView('login') }}>
                       Log In
                     </NavItem>
                   </Nav>
@@ -115,7 +105,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchMessages: (username) => dispatch(messagesFetchData(username)),
     changeView: (view) => dispatch(changeView(view))
   };
 };

@@ -1,30 +1,3 @@
-// export reducers here, ex:
-
-// export function itemsHasErrored(state = false, action) {
-//   switch (action.type) {
-//       case 'ITEMS_HAS_ERRORED':
-//           return action.hasErrored;
-//       default:
-//           return state;
-//   }
-// }
-// export function itemsIsLoading(state = false, action) {
-//   switch (action.type) {
-//       case 'ITEMS_IS_LOADING':
-//           return action.isLoading;
-//       default:
-//           return state;
-//   }
-// }
-// export function items(state = [], action) {
-//   switch (action.type) {
-//       case 'ITEMS_FETCH_DATA_SUCCESS':
-//           return action.items;
-//       default:
-//           return state;
-//   }
-// }
-
 import {
   DID_GET_MESSAGES,
   DID_SCHEDULE_MESSAGE,
@@ -56,21 +29,16 @@ export function previouslySentMessages(state = [], action) {
   return state;
 }
 
-// export function view(state = 'login', action) {
-//   return state; 
-// }
-
-// START HERE!!!
 export function view(state = 'login', action) {
   switch (action.type) {
     case NAV_TO_LOG_IN:
-      return 'login';
+      return action.view;
     case NAV_TO_MAIN:
-      return 'main';
+      return action.view;
     case NAV_TO_MESSAGES:
-      return 'messages';
+      return action.view;
     case NAV_TO_SIGN_UP:
-      return 'signUp';
+      return action.view;
     default:
       return state;
   }
