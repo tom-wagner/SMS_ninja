@@ -2,7 +2,11 @@ import {
   DID_GET_MESSAGES,
   DID_SCHEDULE_MESSAGE,
   DID_SIGN_UP,
-  DID_LOG_IN
+  DID_LOG_IN,
+  NAV_TO_LOG_IN,
+  NAV_TO_SIGN_UP,
+  NAV_TO_MAIN,
+  NAV_TO_MESSAGES
 } from '../action_types.js';
 
 
@@ -31,5 +35,33 @@ export const handleSignUp = (username, email, passwordInput, phoneNumber) => {
   return {
     type: DID_SIGN_UP,
     payload: null
+  };
+};
+
+export const navToLogin = () => {
+  return {
+    type: NAV_TO_LOG_IN,
+    payload: null,
+  };
+};
+
+export const navToSignUp = () => {
+  return {
+    type: NAV_TO_SIGN_UP,
+    payload: null,
+  };
+};
+
+export const navToMain = () => {
+  return {
+    type: NAV_TO_MAIN,
+    payload: null,
+  };
+};
+
+export const navToMessages = () => {
+  return {
+    type: NAV_TO_MESSAGES,
+    payload: null,
   };
 };

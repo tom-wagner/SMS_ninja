@@ -68,25 +68,25 @@ class App extends Component {
                 (this.props.isLoggedIn)
                 ? <Nav pullRight>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={1} onClick={() => { this.setState({view: 'main'})}}>
+                    <NavItem eventKey={'main'} onClick={() => { this.setState({view: 'main'})}}>
                       Home
                     </NavItem>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={2} onClick={() => { this.setState({view: 'messages'})}}>>
+                    <NavItem eventKey={'messages'} onClick={() => { this.setState({view: 'messages'})}}>>
                       Scheduled Messages
                     </NavItem>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={3} onClick={() => { this.setState({view: 'login'})}}>
+                    <NavItem eventKey={'login'} onClick={() => { this.setState({view: 'login'})}}>
                       Log Out
                     </NavItem>
                   </Nav>
                 : <Nav pullRight>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={4} onClick={() => { this.setState({view: 'signUp'})}}>
+                    <NavItem eventKey={'signUp'} onClick={() => { this.setState({view: 'signUp'})}}>
                       Sign Up
                     </NavItem>
                     {/* NEED TO REFACTOR CLICK HANDLING */}
-                    <NavItem eventKey={5} onClick={() => { this.setState({view: 'login'})}}>
+                    <NavItem eventKey={'login'} onClick={() => { this.setState({view: 'login'})}}>
                       Log In
                     </NavItem>
                   </Nav>
@@ -95,7 +95,6 @@ class App extends Component {
           </Navbar>
         </div>
         <div className="main">
-          {/* This is a div within app.jsx!! */}
           {divToRender}
         </div>
       </div>

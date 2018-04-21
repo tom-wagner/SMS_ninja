@@ -46,5 +46,17 @@ export function previouslySentMessages(state = [], action) {
 }
 
 export function view(state = 'login', action) {
-  return state;
+  return state; 
 }
+
+
+// START HERE!!!
+
+// export function view(state = 'login', action) {
+//   switch (action.type) {
+//     case :
+//       return 
+//     default:
+//       return state;
+//   }
+// };
