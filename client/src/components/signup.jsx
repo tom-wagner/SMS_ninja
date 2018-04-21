@@ -1,13 +1,9 @@
-import React, { Component } from 'react'
-import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
+import React, { Component } from 'react';
+import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { handleSignUp } from '../actions/index.js';
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
   render() {
     return (
       <div>
@@ -17,4 +13,16 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+  return {
+
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

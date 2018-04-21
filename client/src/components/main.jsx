@@ -1,44 +1,49 @@
 import React, { Component } from 'react'
 import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
+import { connect } from 'react-redux';
+import { handleScheduleMessageSubmit } from '../actions/index.js';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      formData: {
-        phoneNumber: '',
-        msg: '',
-        dateTime: '',
-      }
-    };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     formData: {
+  //       phoneNumber: '',
+  //       msg: '',
+  //       dateTime: '',
+  //     }
+  //   };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  //   this.handleChange = this.handleChange.bind(this);
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  // }
 
-  handleChange(prop, evt) {
-    var formData = this.state.formData;
+  // NEED TO REFACTOR TO ACTION
+  // HOW DO I CAPTURE FORM DATA IN REDUX??
+  // handleChange(prop, evt) {
+  //   var formData = this.state.formData;
     
-    formData[prop] = evt.target.value
+  //   formData[prop] = evt.target.value
 
-    this.setState({formData: formData});
-  }
+  //   this.setState({formData: formData});
+  // }
 
-  handleSubmit(evt) {
-    var data = this.state.formData;
+  // NEED TO REFACTOR TO ACTION HANDLER
+  // handleSubmit(evt) {
+  //   var data = this.state.formData;
 
-    // reset state
-    this.setState({
-      formData: {
-        phoneNumber: '',
-        msg: '',
-        dateTime: '',
-      }
-    });
+  //   // reset state
+  //   this.setState({
+  //     formData: {
+  //       phoneNumber: '',
+  //       msg: '',
+  //       dateTime: '',
+  //     }
+  //   });
 
-    this.props.sendMessage(data);
-    evt.preventDefault();
-  }
+  //   this.props.sendMessage(data);
+  //   evt.preventDefault();
+  // }
 
   render() {
     return (
@@ -58,4 +63,16 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

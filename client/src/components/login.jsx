@@ -1,24 +1,18 @@
-import React, { Component } from 'react'
-import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap'
+import React, { Component } from 'react';
+import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { handleLogin } from '../actions/index.js';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      formData: {
-        username: '',
-        password: '',
-      }
-    };
-  }
 
-  handleChange(prop, evt) {
-    var formData = this.state.formData;
+  // HOW DO I CAPTURE FORM DATA IN REDUX??
+  // handleChange(prop, evt) {
+  //   var formData = this.state.formData;
     
-    formData[prop] = evt.target.value
+  //   formData[prop] = evt.target.value
 
-    this.setState({formData: formData});
-  }
+  //   this.setState({formData: formData});
+  // }
 
   render() {
     return (
@@ -35,4 +29,16 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
