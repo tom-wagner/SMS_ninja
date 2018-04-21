@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { handleLogin } from '../actions/index.js';
+import { handleLogin, changeView } from '../actions/index.js';
+import { connect } from 'react-redux';
 
 class LoginForm extends Component {
   render() {
-    const { error, handleSubmit, pristine, reset, submitting } = this.props;
+    const { error, handleSubmit, pristine, reset, submitting, handleLogin } = this.props;
+    console.log(handleLogin);
     return (
       <form onSubmit={handleSubmit(handleLogin)}>
         <Field 
@@ -44,6 +46,27 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
     </div>
   </div>
 );
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLogin: (values) => {
+      dispatch(handleLogin(values))
+      
+      // LATER: check if user was authenticated then conditionally do something
+
+      // For now, just change the view:
+      dispatch(changeView('main'));
+    }
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+LoginForm = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 export default reduxForm({
   form: 'LoginForm',

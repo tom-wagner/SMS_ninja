@@ -42,10 +42,9 @@ export const handleLogin = (values) => {
   // To do now:
   // flip isLoggedIn to true
   // render main page
-
   return {
     type: DID_LOG_IN,
-    payload: null
+    payload: true
   };
 };
 
