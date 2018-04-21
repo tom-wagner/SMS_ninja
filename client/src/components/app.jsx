@@ -21,7 +21,8 @@ class App extends Component {
   // }
 
   renderView() {
-    const view = this.props.view; // compared to this.state.view previously
+    console.log('running!!');
+    const view = 'login'; // this.props.view; // compared to this.state.view previously
 
     if (view === 'login') {
       return <Login />;

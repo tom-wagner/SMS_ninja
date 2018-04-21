@@ -24,3 +24,27 @@
 //           return state;
 //   }
 // }
+
+export function username(state = '', action) {
+  return state;
+}
+
+export function phoneNumber(state = '', action) {
+  return state;
+}
+
+export function isLoggedIn(state = false, action) {
+  return state;
+}
+
+export function scheduledMessages(state = [], action) {
+  return state;
+}
+
+export function previouslySentMessages(state = [], action) {
+  return state;
+}
+
+export function view(state = 'login', action) {
+  return state;
+}
