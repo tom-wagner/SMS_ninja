@@ -7,5 +7,5 @@ export default combineReducers({
   isLoggedIn,
   scheduledMessages,
   previouslySentMessages,
-  view
+  view // DONE
 });

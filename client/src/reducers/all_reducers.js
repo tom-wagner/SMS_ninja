@@ -25,6 +25,17 @@
 //   }
 // }
 
+import {
+  DID_GET_MESSAGES,
+  DID_SCHEDULE_MESSAGE,
+  DID_SIGN_UP,
+  DID_LOG_IN,
+  NAV_TO_LOG_IN,
+  NAV_TO_SIGN_UP,
+  NAV_TO_MAIN,
+  NAV_TO_MESSAGES
+} from '../action_types.js';
+
 export function username(state = '', action) {
   return state;
 }
@@ -45,18 +56,22 @@ export function previouslySentMessages(state = [], action) {
   return state;
 }
 
-export function view(state = 'login', action) {
-  return state; 
-}
-
+// export function view(state = 'login', action) {
+//   return state; 
+// }
 
 // START HERE!!!
-
-// export function view(state = 'login', action) {
-//   switch (action.type) {
-//     case :
-//       return 
-//     default:
-//       return state;
-//   }
-// };
+export function view(state = 'login', action) {
+  switch (action.type) {
+    case NAV_TO_LOG_IN:
+      return 'login';
+    case NAV_TO_MAIN:
+      return 'main';
+    case NAV_TO_MESSAGES:
+      return 'messages';
+    case NAV_TO_SIGN_UP:
+      return 'signUp';
+    default:
+      return state;
+  }
+};

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import { connect } from 'react-redux';
-import { fetchMessages } from '../actions/index.js'
+import { fetchMessages, changeView } from '../actions/index.js'
 
 // import AnyComponent from './components/filename.jsx'
 import Login from './login.jsx';
@@ -115,7 +115,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchMessages: (username) => dispatch(messagesFetchData(username))
+    fetchMessages: (username) => dispatch(messagesFetchData(username)),
+    changeView: (view) => dispatch(changeView(view))
   };
 };
 
