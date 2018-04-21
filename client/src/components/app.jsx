@@ -10,24 +10,6 @@ import Messages from './messages.jsx';
 import SignUp from './signup.jsx';
 
 class App extends Component {
-  
-  // NEED TO CONVERT TO AN ACTION:
-  // sendMessage(msgData) {
-    //   console.log('firing!!');
-    //   var options = {
-      //     method: 'POST',
-      //     url: '/SMS',
-      //     params: msgData
-      //   }
-      //   axios(options).then(result => {
-        //     console.log(result);
-        
-        //     // alert user of success
-        //     window.alert('message sent successfully!');
-        //   }).catch(err => {
-          //     console.log(err);
-          //   });
-          // }
           
   render() {
     let divToRender = null;
@@ -60,7 +42,7 @@ class App extends Component {
                 (isLoggedIn)
                 ? <Nav pullRight>
                     <NavItem eventKey={'main'} onClick={() => { changeView('main') }}>
-                      Home
+                      Schedule a SMS/Text Message
                     </NavItem>
                     <NavItem eventKey={'messages'} onClick={() => { changeView('messages') }}>
                       Scheduled Messages

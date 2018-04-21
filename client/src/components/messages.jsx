@@ -12,21 +12,11 @@ class Messages extends Component {
   }
   render() {
     return (
-      <div>This is messages!</div>
+      <div>
+        This is all the users scheduled messages!
+      </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Messages);
+export default connect(null, null)(Messages);
