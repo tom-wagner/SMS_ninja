@@ -16,17 +16,18 @@ export const fetchMessages = username => {
   };
 };
 
-export const handleScheduleMessageSubmit = (username, phoneNumber, message, dateTime) => {
+export const handleScheduleMessageSubmit = (values) => { // username, phoneNumber, message, dateTime
   return {
     type: DID_SCHEDULE_MESSAGE,
     payload: null
   };
 };
 
-export const handleSignUp = (username, email, passwordInput, phoneNumber) => {
+export const handleSignUp = (values) => {
+  console.log('values from sign up form: ', values);
   return {
     type: DID_SIGN_UP,
-    payload: null
+    payload: true
   };
 };
 
@@ -41,10 +42,9 @@ export const handleLogin = (values) => {
 
   // To do now:
   // flip isLoggedIn to true
-  // render main page
   return {
     type: DID_LOG_IN,
-    payload: true
+    payload: values
   };
 };
 

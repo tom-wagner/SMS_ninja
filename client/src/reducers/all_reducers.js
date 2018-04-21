@@ -11,19 +11,26 @@ import {
 } from '../action_types.js';
 
 export function username(state = '', action) {
-  return state;
+  switch (action.type) {
+    case DID_LOG_IN:
+      return action.payload.username;
+    default:
+      return state;
+  }
 }
 
 export function phoneNumber(state = '', action) {
+  // LATER: LOOK UP PHONE NUMBER FROM DATABASE AT LOGIN
+  
   return state;
 }
 
 export function toggleLogIn(state = false, action) {
   switch (action.type) {
     case DID_LOG_IN:
-      return action.payload;
+      return true;
     case DID_LOG_OUT:
-      return action.payload;
+      return false;
     default:
       return state;
   }

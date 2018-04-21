@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {/* REQUIRED COMPONENTS HERE*/} from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { handleSignUp } from '../actions/index.js';
+import SignUpForm from '../forms/signup_form.jsx';
 
 class SignUp extends Component {
   render() {
     return (
       <div>
-        This is signup!!
+        <SignUpForm />
       </div>
     );
   }
