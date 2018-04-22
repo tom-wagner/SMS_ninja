@@ -19,6 +19,7 @@
   width: 20%;
   box-shadow: 2px 2px 2px slategray;
   border: 1px solid black;
+  margin-bottom: 15px;
 }
 
 .text-box {
@@ -27,4 +28,15 @@
 
 .form {
   border: 1px solid black;
+  padding: 10px;
+}
+
+.btn-default {
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px slategray;
+  border: 1px solid black;
+}
+
+.secondary-btn {
+  margin-left: 15px;
 }

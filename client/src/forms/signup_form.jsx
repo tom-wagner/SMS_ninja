@@ -16,36 +16,34 @@ class SignUpForm extends Component {
             component={renderField}
             label="Username"
             className="one-line-input"
-          /><br/>
+          />
           <Field 
             name="password"
             type="password"
             component={renderField}
             label="Password"
             className="one-line-input"
-          /><br/>
+          />
           <Field 
             name="email"
             type="email"
             component={renderField}
             label="Email"
             className="one-line-input"
-          /><br/>
+          />
           <Field 
             name="phoneNumber"
             type="tel"
             component={renderField}
             label="Phone Number"
             className="one-line-input"
-          /><br/>
+          />
           {error && <strong>{error}</strong>}
           <div>
-            <br/>
-            <button type="submit" disabled={submitting}>
-              Log In
+            <button type="submit" disabled={submitting} className="btn-default">
+              Sign Up
             </button>
-            <br/><br/>
-            <button type="button" disabled={pristine || submitting} onClick={reset}>
+            <button type="button" disabled={submitting} onClick={reset} className="btn-default secondary-btn">
               Clear Values
             </button>
           </div>

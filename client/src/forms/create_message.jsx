@@ -21,37 +21,34 @@ class CreateMessageForm extends Component {
             component={renderField}
             label="Username"
             className="one-line-input"
-          /><br/>
+          />
           <Field 
             name="phoneNumber"
             type="tel"
             component={renderField}
             label="Phone Number"
             className="one-line-input"
-          /><br/>
+          />
           <Field
             name="msg"
             type="textarea"
             component={renderField}
             label="Message Text"
             className="one-line-input text-box"
-          /><br/>
+          />
           <Field 
             name="dateTime"
             type="datetime-local"
             component={renderField}
             label="When should we send the message?"
             className="one-line-input"
-          /><br/>
-          
+          />
           {error && <strong>{error}</strong>}
           <div>
-            <br/>
-            <button type="submit" disabled={submitting}>
-              Log In
+            <button type="submit" disabled={submitting} className="btn-default">
+              Schedule Message
             </button>
-            <br/><br/>
-            <button type="button" disabled={pristine || submitting} onClick={reset}>
+            <button type="button" disabled={submitting} onClick={reset} className="btn-default secondary-btn">
               Clear Values
             </button>
           </div>
