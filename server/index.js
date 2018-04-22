@@ -30,13 +30,11 @@ app.post('/SMS', function(req, res) {
 });
 
 app.post('/newUser', function (req, res) {
-  DB.addUser({
-    username: 'this is a new user',
-    email: 'test2!!',
-    phoneNumber: 'test 2!!',
-    hashedPassword: 'test 2!!',
-    salt: 'test 2!!',
-  }, (err, success) => {
+  // toDoLater! -- check if username and emails are already in the database
+  // show the user real-time whether username is available
+  // hash password using bCrypt or similar
+
+  DB.addUser(req.body, (err, success) => {
     if (err) {
       console.log('err: ', err);
       res.status(500).send(err);
@@ -45,6 +43,14 @@ app.post('/newUser', function (req, res) {
     }
   });
 });
+
+app.post('/message', function (req, res) {
+  // post message to DB
+});
+
+app.post('/login', function (req, res) {
+  // pull user's phoneNumber and scheduled messages from the database and send to the client
+})
 
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');

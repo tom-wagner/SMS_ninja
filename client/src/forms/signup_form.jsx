@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { handleSignUp, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class SignUpForm extends Component {
   render() {
@@ -66,14 +67,31 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch) => {
   return {
     handleSignUp: (values) => {
+      // Add to users table in the database
+      const { username, email, phoneNumber, password} = values;
+
+      var options = {
+        method: 'post',
+        url: '/newUser',
+        data: {
+          username, email, phoneNumber,
+          hashedPassword: password,
+          salt: 'TBD',
+        }
+      }
+      axios(options).then(result => {
+        console.log(result);
+      }).catch(err => {
+        console.log(err);
+      });
+      
       dispatch(handleSignUp(values));
       
-      // LATER: Check availability of username in database
-      // LATER: Add to users table in the database
-      // LATER: Live validate inputs
-
       // For now, just change the view:
       dispatch(changeView('login'));
+
+      // LATER: Check availability of username in database
+      // LATER: Live validate inputs
     }
   };
 };
