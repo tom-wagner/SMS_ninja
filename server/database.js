@@ -47,7 +47,7 @@ function addUser(userDetails, callback) {
   });
 }
 
-function retrieveMessages(username, callback) {
+function retrieveUserMessages(username, callback) {
   Message.find({ username: username }, (err, docs) => {
     if (err) {
       callback(err, null);
@@ -57,7 +57,19 @@ function retrieveMessages(username, callback) {
   });
 }
 
+function retrieveUserPhoneNumber(username, callback) {
+  User.findOne({username: username}, (err, docs) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log(docs);
+      callback(err, docs);
+    }
+  });
+}
+
 exports.addMessage = addMessage;
 exports.addUser = addUser;
-exports.retrieveMessages = retrieveMessages;
+exports.retrieveUserMessages = retrieveUserMessages;
+exports.retrieveUserPhoneNumber = retrieveUserPhoneNumber
 exports.DB = DB;

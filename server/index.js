@@ -53,19 +53,29 @@ app.post('/newUser', function(req, res) {
   });
 });
 
-app.get('/messages', function(req, res) {
-  DB.retrieveMessages(req.query.username || 'twagner55', (err, docs) => {
+app.post('/login', function (req, res) {
+  // AUTHENTICATE USER LATER
+
+  // For now:
+    // Pull down phoneNumber
+    // Then pull down messages
+    // Then send everything back to client
+  DB.retrieveUserPhoneNumber(req.query.username, (err, docs) => {
     if (err) {
       console.log('err: ', err);
       res.status(500).send(err);
     } else {
-      res.status(200).send(docs);
+      let phoneNumber = docs.phoneNumber;
+      DB.retrieveUserMessages(req.query.username, (err, docs) => {
+        if (err) {
+          console.log('err: ', err);
+          res.status(500).send(err);
+        } else {
+          res.status(200).send([phoneNumber, docs]);
+        }
+      });
     }
-  })
-});
-
-app.post('/login', function (req, res) {
-  // pull user's phoneNumber and scheduled messages from the database and send to the client
+  });
 })
 
 app.listen(process.env.PORT || 3000, function() {
