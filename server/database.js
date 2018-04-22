@@ -43,19 +43,18 @@ function addUser(userDetails, callback) {
   console.log('userDetails: ', userDetails);
   
   User.create({
-    username: 'test entry',
-    email: 'test entry',
-    phoneNumber: 'test entry!!',
-    hashedPassword: 'test entry!!',
-    salt: 'test entry!!',
-  }), (err, success) => {
+    username: 'this is a new user',
+    email: 'test2!!',
+    phoneNumber: 'test 2!!',
+    hashedPassword: 'test 2!!',
+    salt: 'test 2!!',
+  }, err => {
     if (err) {
-      callback(null, err);
+      callback(err, null);
     } else {
-      console.log('success in DB: ', success);
-      callback(null, success);
+      callback(null, 'success!');
     }
-  }
+  });
 }
 
 exports.addUser = addUser;

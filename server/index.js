@@ -22,18 +22,22 @@ app.post('/SMS', function(req, res) {
     if (result.errorCode) {
       res.status(500).send(`Server error: ${result.errorMessage}, please try again later.`)
     } else {
-      DB.addUser({}, (err, success) => {
-        if (err) {
-          console.log('err: ', err);
-        } else {
-          console.log('success: ', success);
-        }
-      });
       res.status(200).send(result.body);
     }
   }).catch(err => {
     console.log(err);
   })
+});
+
+app.post('/newUser', function (req, res) {
+  DB.addUser({}, (err, success) => {
+    if (err) {
+      console.log('err: ', err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).send('New user successfully posted to DB!');
+    }
+  });
 });
 
 app.listen(process.env.PORT || 3000, function() {
