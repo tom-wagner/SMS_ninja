@@ -7,18 +7,20 @@ class LoginForm extends Component {
   render() {
     const { error, handleSubmit, pristine, reset, submitting, handleLogin } = this.props;
     return (
-      <form onSubmit={handleSubmit(handleLogin)}>
+      <form onSubmit={handleSubmit(handleLogin)} className="form" >
         <Field 
           name="username"
           type="text"
           component={renderField}
           label="Username"
+          className="one-line-input"
         /><br/>
         <Field 
           name="password"
           type="password"
           component={renderField}
           label="Password"
+          className="one-line-input"
         />
         {error && <strong>{error}</strong>}
         <div>
@@ -36,11 +38,11 @@ class LoginForm extends Component {
   }
 }
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ className, input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} />
+      <input {...input} placeholder={label} type={type} className={className} />
       {touched && error && <span>{error}</span>}
     </div>
   </div>

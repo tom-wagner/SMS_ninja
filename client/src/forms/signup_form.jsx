@@ -8,33 +8,35 @@ class SignUpForm extends Component {
     const { error, handleSubmit, pristine, reset, submitting, handleSignUp } = this.props;
     return (
       <div>
-        Sign Up!!
-        <br/>
-        <br/>
-        <form onSubmit={handleSubmit(handleSignUp)}>
+        <p>Sign Up!!</p>
+        <form onSubmit={handleSubmit(handleSignUp)} className="form" >
           <Field 
             name="username"
             type="text"
             component={renderField}
             label="Username"
+            className="one-line-input"
           /><br/>
           <Field 
             name="password"
             type="password"
             component={renderField}
             label="Password"
+            className="one-line-input"
           /><br/>
           <Field 
             name="email"
             type="email"
             component={renderField}
             label="Email"
+            className="one-line-input"
           /><br/>
           <Field 
             name="phoneNumber"
             type="tel"
             component={renderField}
             label="Phone Number"
+            className="one-line-input"
           /><br/>
           {error && <strong>{error}</strong>}
           <div>
@@ -53,11 +55,11 @@ class SignUpForm extends Component {
   }
 }
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ className, input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} />
+      <input {...input} placeholder={label} type={type} className={className} />
       {touched && error && <span>{error}</span>}
     </div>
   </div>

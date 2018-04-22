@@ -14,3 +14,17 @@
   padding-top: 65px; /* 50px to push below navbar, 15px to match padding-left*/
   padding-left: 15px; /*15px to match padding on Navbar title*/
 }
+
+.one-line-input {
+  width: 20%;
+  box-shadow: 2px 2px 2px slategray;
+  border: 1px solid black;
+}
+
+.text-box {
+  height: 100px;
+}
+
+.form {
+  border: 1px solid black;
+}

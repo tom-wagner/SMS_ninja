@@ -12,30 +12,36 @@ class CreateMessageForm extends Component {
         <br/>
         <br/>
         {/* passing this.props as the 2nd argument to the submitHandler below in order to access state */}
-        <form onSubmit={ handleSubmit(values => { handleScheduleMessageSubmit(values, this.props) })}>
+        <form
+          onSubmit={ handleSubmit(values => { handleScheduleMessageSubmit(values, this.props) })}
+          className="form" >
           <Field 
             name="username"
             type="text"
             component={renderField}
             label="Username"
+            className="one-line-input"
           /><br/>
           <Field 
             name="phoneNumber"
             type="tel"
             component={renderField}
             label="Phone Number"
+            className="one-line-input"
           /><br/>
           <Field
             name="msg"
             type="textarea"
             component={renderField}
             label="Message Text"
+            className="one-line-input text-box"
           /><br/>
           <Field 
             name="dateTime"
             type="datetime-local"
             component={renderField}
             label="When should we send the message?"
+            className="one-line-input"
           /><br/>
           
           {error && <strong>{error}</strong>}
@@ -55,11 +61,11 @@ class CreateMessageForm extends Component {
   }
 }
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
+const renderField = ({ className, input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} />
+      <input {...input} placeholder={label} type={type} className={className} />
       {touched && error && <span>{error}</span>}
     </div>
   </div>
