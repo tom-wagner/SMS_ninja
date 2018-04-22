@@ -7,10 +7,8 @@ class CreateMessageForm extends Component {
   render() {
     const { error, handleSubmit, pristine, reset, submitting, handleScheduleMessageSubmit } = this.props;
     return (
-      <div>
-        Schedule a message!
-        <br/>
-        <br/>
+      <div className="form-container">
+        <h1 className="form-header">Schedule a Message</h1>
         {/* passing this.props as the 2nd argument to the submitHandler below in order to access state */}
         <form
           onSubmit={ handleSubmit(values => { handleScheduleMessageSubmit(values, this.props) })}

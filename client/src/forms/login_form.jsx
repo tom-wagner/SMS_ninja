@@ -7,31 +7,34 @@ class LoginForm extends Component {
   render() {
     const { error, handleSubmit, pristine, reset, submitting, handleLogin } = this.props;
     return (
-      <form onSubmit={handleSubmit(handleLogin)} className="form" >
-        <Field 
-          name="username"
-          type="text"
-          component={renderField}
-          label="Username"
-          className="one-line-input"
-        />
-        <Field 
-          name="password"
-          type="password"
-          component={renderField}
-          label="Password"
-          className="one-line-input"
-        />
-        {error && <strong>{error}</strong>}
-        <div>
-          <button type="submit" disabled={submitting} className="btn-default">
-            Log In
-          </button>
-          <button type="button" disabled={submitting} onClick={reset} className="btn-default secondary-btn">
-            Clear Values
-          </button>
-        </div>
-      </form>
+      <div className="form-container">
+        <h1 className="form-header">Log In</h1>
+        <form onSubmit={handleSubmit(handleLogin)} className="form" >
+          <Field 
+            name="username"
+            type="text"
+            component={renderField}
+            label="Username"
+            className="one-line-input"
+          />
+          <Field 
+            name="password"
+            type="password"
+            component={renderField}
+            label="Password"
+            className="one-line-input"
+          />
+          {error && <strong>{error}</strong>}
+          <div>
+            <button type="submit" disabled={submitting} className="btn-default">
+              Log In
+            </button>
+            <button type="button" disabled={submitting} onClick={reset} className="btn-default secondary-btn">
+              Clear Values
+            </button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

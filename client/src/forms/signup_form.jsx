@@ -7,8 +7,8 @@ class SignUpForm extends Component {
   render() {
     const { error, handleSubmit, pristine, reset, submitting, handleSignUp } = this.props;
     return (
-      <div>
-        <p>Sign Up!!</p>
+      <div className="form-container">
+        <h1 className="form-header">Sign Up</h1>
         <form onSubmit={handleSubmit(handleSignUp)} className="form" >
           <Field 
             name="username"
