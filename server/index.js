@@ -17,16 +17,25 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/SMS', function(req, res) {
-  // message text, recipient number (ex: '+16123603573'), twilioNumber (same format)
-  twilio.sendSMS(req.body.msg, '+1' + req.body.phoneNumber, twilioNumber).then((result, err) => {
-    if (result.errorCode) {
-      res.status(500).send(`Server error: ${result.errorMessage}, please try again later.`)
+  // toDoLater! -- Schedule SMS delivery using Cron ---> https://github.com/kelektiv/node-cron (see WebHistorian for example use of Cron)
+
+  console.log('req.body in POST /sms: \n', req.body);
+  DB.addMessage(req.body, (err, success) => {
+    if (err) {
+      res.status(500).send('error posting to DB: ', err);
     } else {
-      res.status(200).send(result.body);
+      // Posted successfully to DB, now send via Twilio
+      twilio.sendSMS(req.body.messageText, '+1' + req.body.recipient, twilioNumber).then((result, err) => {
+        if (result.errorCode) {
+          res.status(500).send(`Twilio server error: ${result.errorMessage}, please try again later.`);
+        } else {
+          res.status(200).send(result.body);
+        }
+      }).catch(err => {
+        res.status(500).send(`Twilio server error: ${err}`)
+      })
     }
-  }).catch(err => {
-    console.log(err);
-  })
+  });
 });
 
 app.post('/newUser', function (req, res) {
@@ -42,10 +51,6 @@ app.post('/newUser', function (req, res) {
       res.status(200).send('New user successfully posted to DB!');
     }
   });
-});
-
-app.post('/message', function (req, res) {
-  // post message to DB
 });
 
 app.post('/login', function (req, res) {

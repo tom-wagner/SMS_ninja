@@ -15,14 +15,14 @@ class CreateMessageForm extends Component {
           onSubmit={ handleSubmit(values => { handleScheduleMessageSubmit(values, this.props) })}
           className="form" >
           <Field 
-            name="phoneNumber"
+            name="recipient"
             type="tel"
             component={renderField}
             label="Phone Number"
             className="one-line-input"
           />
           <Field
-            name="msg"
+            name="messageText"
             type="textarea"
             component={renderField}
             label="Message Text"
@@ -32,7 +32,7 @@ class CreateMessageForm extends Component {
             name="dateTime"
             type="datetime-local"
             component={renderField}
-            label="When should we send the message?"
+            label="Time/date to send - BETA... aka NOT WORKING -- msg sends now"
             className="one-line-input"
           />
           {error && <strong>{error}</strong>}
@@ -74,32 +74,26 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch, state) => {
   return {
     handleScheduleMessageSubmit: (values, props) => {
-      console.log('in submit - values: ', values);
-      console.log('in submit - props: ', props);
+      const { dateTime, messageText, recipient } = values;
+      const { username } = props;
 
-      var options = {
+      axios({
         method: 'post',
         url: '/SMS',
-        data: {
-          msg: values.msg,
-          phoneNumber: values.phoneNumber
-        }
-      }
-
-      axios(options).then(result => {
+        data: { username, messageText, recipient, dateTime }
+      }).then(result => {
         console.log('result: ', result);
       }).catch(err => {
         console.log('err: ', err);
       });
 
-      // send Axios request to Server
-      // THEN update scheduled messages array
-      // THEN alert user whether it was successful
+      // toDoLater! -- update scheduled messages array
+      // toDoLater! -- reset form to be blank upon success
+      // toDoLater! -- improve error handling
     }
   };
 };
 
-// USE LATER IF NEEDED
 const mapStateToProps = (state) => {
   return {
     username: state.username,
@@ -118,21 +112,3 @@ export default reduxForm({
   /*validationFunction*/
   /*warningFunction*/
 })(CreateMessageForm);
-
-// NEED TO CONVERT TO AN ACTION:
-// sendMessage(msgData) {
-//   console.log('firing!!');
-//   var options = {
-//     method: 'POST',
-//     url: '/SMS',
-//     params: msgData
-//   }
-//   axios(options).then(result => {
-//     console.log(result);
-
-//     // alert user of success
-//     window.alert('message sent successfully!');
-//   }).catch(err => {
-//     console.log(err);
-//   });
-// }

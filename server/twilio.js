@@ -1,6 +1,6 @@
 var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
 
-// overwrite if deployed
+// overwrite variables from config.js if deployed
 acctSID = process.env.acctSID || acctSID;
 authToken = process.env.testSID || authToken;
 testToken = process.env.testToken || testToken;
