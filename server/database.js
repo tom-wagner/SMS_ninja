@@ -28,27 +28,17 @@ Message = DB.model('Message', messageSchema);
 User = DB.model('User', userSchema);
 
 function addMessage(msgDetails, callback) {
-  Message.create({
-
-  }), (err, success) => {
+  Message.create(msgDetails, err => {
     if (err) {
-      callback(null, err);
+      callback(err, null);
     } else {
-      callback(null, success);
+      callback(null, 'success!');
     }
-  }
+  });
 }
 
 function addUser(userDetails, callback) {
-  console.log('userDetails: ', userDetails);
-  
-  User.create({
-    username: 'this is a new user',
-    email: 'test2!!',
-    phoneNumber: 'test 2!!',
-    hashedPassword: 'test 2!!',
-    salt: 'test 2!!',
-  }, err => {
+  User.create(userDetails, err => {
     if (err) {
       callback(err, null);
     } else {

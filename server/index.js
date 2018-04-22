@@ -30,7 +30,13 @@ app.post('/SMS', function(req, res) {
 });
 
 app.post('/newUser', function (req, res) {
-  DB.addUser({}, (err, success) => {
+  DB.addUser({
+    username: 'this is a new user',
+    email: 'test2!!',
+    phoneNumber: 'test 2!!',
+    hashedPassword: 'test 2!!',
+    salt: 'test 2!!',
+  }, (err, success) => {
     if (err) {
       console.log('err: ', err);
       res.status(500).send(err);
