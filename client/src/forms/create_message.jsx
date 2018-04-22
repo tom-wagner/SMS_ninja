@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { handleScheduleMessageSubmit, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class CreateMessageForm extends Component {
   render() {
@@ -13,13 +14,6 @@ class CreateMessageForm extends Component {
         <form
           onSubmit={ handleSubmit(values => { handleScheduleMessageSubmit(values, this.props) })}
           className="form" >
-          <Field 
-            name="username"
-            type="text"
-            component={renderField}
-            label="Username"
-            className="one-line-input"
-          />
           <Field 
             name="phoneNumber"
             type="tel"
@@ -43,7 +37,8 @@ class CreateMessageForm extends Component {
           />
           {error && <strong>{error}</strong>}
           <div>
-            <button type="submit" disabled={submitting} className="btn-default">
+            {/* need to clear values on submit*/}
+            <button type="submit" disabled={submitting} className="btn-default" >
               Schedule Message
             </button>
             <button type="button" disabled={submitting} onClick={reset} className="btn-default secondary-btn">
@@ -81,6 +76,21 @@ const mapDispatchToProps = (dispatch, state) => {
     handleScheduleMessageSubmit: (values, props) => {
       console.log('in submit - values: ', values);
       console.log('in submit - props: ', props);
+
+      var options = {
+        method: 'post',
+        url: '/SMS',
+        data: {
+          msg: values.msg,
+          phoneNumber: values.phoneNumber
+        }
+      }
+
+      axios(options).then(result => {
+        console.log('result: ', result);
+      }).catch(err => {
+        console.log('err: ', err);
+      });
 
       // send Axios request to Server
       // THEN update scheduled messages array

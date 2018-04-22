@@ -17,14 +17,18 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/SMS', function(req, res) {
-
-  console.log('req.query on server: ', req.query);
-  
   // message text, recipient number (ex: '+16123603573'), twilioNumber (same format)
-  twilio.sendSMS(req.query.msg, '+1' + req.query.phoneNumber, twilioNumber).then((result, err) => {
+  twilio.sendSMS(req.body.msg, '+1' + req.body.phoneNumber, twilioNumber).then((result, err) => {
     if (result.errorCode) {
       res.status(500).send(`Server error: ${result.errorMessage}, please try again later.`)
     } else {
+      DB.addUser({}, (err, success) => {
+        if (err) {
+          console.log('err: ', err);
+        } else {
+          console.log('success: ', success);
+        }
+      });
       res.status(200).send(result.body);
     }
   }).catch(err => {
