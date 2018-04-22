@@ -58,19 +58,19 @@ app.post('/login', function (req, res) {
 
   // For now:
     // Pull down phoneNumber
-    // Then pull down messages
-    // Then send everything back to client
-  DB.retrieveUserPhoneNumber(req.query.username, (err, docs) => {
-    if (err) {
-      console.log('err: ', err);
-      res.status(500).send(err);
-    } else {
-      let phoneNumber = docs.phoneNumber;
-      DB.retrieveUserMessages(req.query.username, (err, docs) => {
-        if (err) {
-          console.log('err: ', err);
-          res.status(500).send(err);
-        } else {
+    DB.retrieveUserPhoneNumber(req.body.username, (err, docs) => {
+      if (err) {
+        console.log('err: ', err);
+        res.status(500).send(err);
+      } else {
+        let phoneNumber = docs.phoneNumber;
+        // Then pull down messages
+        DB.retrieveUserMessages(req.body.username, (err, docs) => {
+          if (err) {
+            console.log('err: ', err);
+            res.status(500).send(err);
+          } else {
+          // Then send everything back to client
           res.status(200).send([phoneNumber, docs]);
         }
       });

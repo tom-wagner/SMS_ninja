@@ -55,6 +55,17 @@ function retrieveUserMessages(username, callback) {
       callback(null, docs);
     }
   });
+
+  // NOT WORKING BUT CLOSE:
+  // Message.$where('this.username ==== "twagner55"')
+  //        .$where('this.messageText !== "undefined"')
+  //        .exec( (err, docs) => {
+  //   if (err) {
+  //     callback(err, null);
+  //   } else {
+  //     callback(null, docs);
+  //   }
+  // });
 }
 
 function retrieveUserPhoneNumber(username, callback) {

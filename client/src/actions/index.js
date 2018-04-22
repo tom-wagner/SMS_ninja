@@ -34,8 +34,10 @@ export const handleSignUp = (values) => {
   };
 };
 
-export const handleLogin = (values) => {
+export const handleLogin = (values, phoneNumber, messages) => {
   console.log('username and password: ', values);
+  console.log('phoneNumber: ', phoneNumber);
+  console.log('messages: ', messages);
 
   // TO DO LATER:
   // authenticate user

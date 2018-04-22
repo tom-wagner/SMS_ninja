@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { handleLogin, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class LoginForm extends Component {
   render() {
@@ -52,12 +53,20 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch) => {
   return {
     handleLogin: (values) => {
-      dispatch(handleLogin(values))
-      
-      // LATER: check if user was authenticated then conditionally do something
+      const { username, password } = values;
 
-      // For now, just change the view:
-      dispatch(changeView('main'));
+      axios({
+        method: 'post',
+        url: '/login',
+        data: { username, password }
+      }).then(response => {
+        let phoneNumber = response.data[0];
+        let messages = response.data[1];
+        dispatch(handleLogin(values, phoneNumber, messages))
+        dispatch(changeView('main'));
+      }).catch(err => {
+        console.log(err);
+      });
     }
   };
 };
