@@ -34,11 +34,7 @@ export const handleSignUp = (values) => {
   };
 };
 
-export const handleLogin = (values, phoneNumber, messages) => {
-  console.log('username and password: ', values);
-  console.log('phoneNumber: ', phoneNumber);
-  console.log('messages: ', messages);
-
+export const handleLogin = (username, password, phoneNumber, messages) => {
   // TO DO LATER:
   // authenticate user
   // fetch their scheduled messages
@@ -49,7 +45,7 @@ export const handleLogin = (values, phoneNumber, messages) => {
   // flip isLoggedIn to true
   return {
     type: DID_LOG_IN,
-    payload: values
+    payload: { username, password, phoneNumber, messages }
   };
 };
 

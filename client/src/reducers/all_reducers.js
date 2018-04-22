@@ -24,6 +24,8 @@ export function username(state = '', action) {
 export function phoneNumber(state = '', action) {
   // LATER: LOOK UP PHONE NUMBER FROM DATABASE AT LOGIN
   switch (action.type) {
+    case DID_LOG_IN:
+      return action.payload.phoneNumber;
     case DID_LOG_OUT:
       return '';
     default:
@@ -44,6 +46,8 @@ export function toggleLogIn(state = false, action) {
 
 export function scheduledMessages(state = [], action) {
   switch (action.type) {
+    case DID_LOG_IN:
+      return action.payload.messages;
     case DID_LOG_OUT:
       return [];
     default:

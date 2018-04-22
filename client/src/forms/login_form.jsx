@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
       }).then(response => {
         let phoneNumber = response.data[0];
         let messages = response.data[1];
-        dispatch(handleLogin(values, phoneNumber, messages))
+        dispatch(handleLogin(username, password, phoneNumber, messages));
         dispatch(changeView('main'));
       }).catch(err => {
         console.log(err);
