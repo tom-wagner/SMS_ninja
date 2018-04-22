@@ -61,15 +61,25 @@ class CreateMessageForm extends Component {
   }
 }
 
-const renderField = ({ className, input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label>{label}</label>
+const renderField = ({ className, input, label, type, meta: { touched, error } }) => {
+  let inputToRender = null;
+
+  if (type === 'textarea') {
+    inputToRender = <textarea {...input} placeholder={label} type={type} className={className} />;
+  } else {
+    inputToRender = <input {...input} placeholder={label} type={type} className={className} />;
+  }
+  
+  return (
     <div>
-      <input {...input} placeholder={label} type={type} className={className} />
-      {touched && error && <span>{error}</span>}
+      <label>{label}</label>
+      <div>
+        {inputToRender}
+        {touched && error && <span>{error}</span>}
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 const mapDispatchToProps = (dispatch, state) => {
   return {
