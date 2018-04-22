@@ -38,7 +38,7 @@ app.post('/SMS', function(req, res) {
   });
 });
 
-app.post('/newUser', function (req, res) {
+app.post('/newUser', function(req, res) {
   // toDoLater! -- check if username and emails are already in the database
   // show the user real-time whether username is available
   // hash password using bCrypt or similar
@@ -51,6 +51,17 @@ app.post('/newUser', function (req, res) {
       res.status(200).send('New user successfully posted to DB!');
     }
   });
+});
+
+app.get('/messages', function(req, res) {
+  DB.retrieveMessages(req.query.username || 'twagner55', (err, docs) => {
+    if (err) {
+      console.log('err: ', err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(docs);
+    }
+  })
 });
 
 app.post('/login', function (req, res) {

@@ -47,6 +47,17 @@ function addUser(userDetails, callback) {
   });
 }
 
-exports.addUser = addUser;
+function retrieveMessages(username, callback) {
+  Message.find({ username: username }, (err, docs) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, docs);
+    }
+  });
+}
+
 exports.addMessage = addMessage;
+exports.addUser = addUser;
+exports.retrieveMessages = retrieveMessages;
 exports.DB = DB;
