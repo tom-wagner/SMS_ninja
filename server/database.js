@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var DB = mongoose.connection;
 
-mongoose.connect('mongodb://localhost/sms_ninja');
+mongoose.connect(process.env.MLAB_URL || 'mongodb://localhost/sms_ninja');
 
 DB.on('error', console.error.bind(console, 'connection error:'));
 DB.once('open', function() {
