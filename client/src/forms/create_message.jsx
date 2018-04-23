@@ -7,7 +7,8 @@ import axios from 'axios';
 class CreateMessageForm extends Component {
   render() {
     console.log('this.props in CreateMessageForm', this.props);
-    const { error, handleSubmit, pristine, reset, submitting, handleScheduleMessageSubmit } = this.props;
+    const { error, handleSubmit, pristine, reset, submitting, handleScheduleMessageSubmit, form } = this.props;
+    console.log('form name:', form);
     return (
       <div className="form-container">
         <h1 className="form-header">Schedule a Message</h1>
@@ -15,7 +16,8 @@ class CreateMessageForm extends Component {
         <form
           onSubmit={ handleSubmit(values => { handleScheduleMessageSubmit(values, this.props) })}
           className="form" >
-          <Field 
+          <Field
+            formName={form}
             name="recipient"
             type="tel"
             component={renderField}
@@ -75,9 +77,9 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch, state) => {
   return {
     handleScheduleMessageSubmit: (values, props) => {
-      console.log('props in handle: ', props);
+      // console.log('props in handle: ', props);
       const { dateTime, messageText, recipient } = values;
-      const { username } = props;
+      const { username, reset, form } = props;
 
       axios({
         method: 'post',
@@ -87,7 +89,7 @@ const mapDispatchToProps = (dispatch, state) => {
         console.log('result: ', result);
         // Update scheduled messages array
         dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
-        // resetForm();
+        dispatch(reset(form));
         window.alert('message sent successfully!');
       }).catch(err => {
         console.log('err: ', err);
