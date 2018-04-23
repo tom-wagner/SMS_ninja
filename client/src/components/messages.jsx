@@ -18,7 +18,7 @@ class Messages extends Component {
                     let styledNumber = '(' + message.recipient.slice(0, 3) + ') ' + message.recipient.slice(3, 6) + ' - ' + message.recipient.slice(6);
                     let date = moment(message.dateTime).format('MMMM Do YYYY, h:mm a');
                     return (
-                      <li key={id}><b>To: {styledNumber}</b>
+                      <li key={id} className="ind-msg"><b>To: {styledNumber}</b>
                         <ul>
                           <li>Message: {message.messageText}</li>
                           <li><i>Scheduled time: {date}</i></li>

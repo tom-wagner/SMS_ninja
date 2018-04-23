@@ -66,3 +66,13 @@ h1 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.ind-msg {
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+
+li:last-child {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
