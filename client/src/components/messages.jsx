@@ -11,8 +11,8 @@ class Messages extends Component {
         <Row className="show-grid">
           <Col xs={8} xsOffset={2}>
             <div className="messages-container">
-              <h1 className="form-header">Scheduled Messages</h1>
-              <h4 className="form-header"><i>for user: {this.props.username}</i></h4>
+              <h1 className="form-header">Scheduled Messages</h1><br/>
+              <h4 className="form-header">For user: {this.props.username}</h4>
               <ul>
                 {this.props.scheduledMessages.reverse().map((message, id) => {
                   if (message.messageText) {
