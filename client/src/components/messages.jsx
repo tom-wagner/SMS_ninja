@@ -21,7 +21,7 @@ class Messages extends Component {
                       <li key={id} className="ind-msg"><b>To: {styledNumber}</b>
                         <ul>
                           <li>Message: {message.messageText}</li>
-                          <li><i>Scheduled time: {date}</i></li>
+                          <li className="bottom-li"><i>Scheduled time: {date}</i></li>
                         </ul>
                       </li>
                     );
