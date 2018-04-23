@@ -83,11 +83,12 @@ const mapDispatchToProps = (dispatch, state) => {
         data: { username, messageText, recipient, dateTime }
       }).then(result => {
         console.log('result: ', result);
+        // Update scheduled messages array
+        dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
       }).catch(err => {
         console.log('err: ', err);
       });
 
-      // toDoLater! -- update scheduled messages array
       // toDoLater! -- reset form to be blank upon success
       // toDoLater! -- improve error handling
     }

@@ -50,6 +50,8 @@ export function scheduledMessages(state = [], action) {
       return action.payload.messages;
     case DID_LOG_OUT:
       return [];
+    case DID_SCHEDULE_MESSAGE:
+      return state.concat([action.payload]);
     default:
       return state;
   }

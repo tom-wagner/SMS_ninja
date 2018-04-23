@@ -17,10 +17,10 @@ export const fetchMessages = username => {
   };
 };
 
-export const handleScheduleMessageSubmit = (values) => { // username, phoneNumber, message, dateTime
+export const handleScheduleMessageSubmit = (msgData) => { // username, phoneNumber, message, dateTime
   return {
     type: DID_SCHEDULE_MESSAGE,
-    payload: null
+    payload: msgData
   };
 };
 
