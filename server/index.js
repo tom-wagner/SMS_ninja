@@ -6,13 +6,9 @@ var twilio = require('./twilio.js');
 
 if (!process.env) {
   var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+} else {
+  var twilioNumber = process.env.twilioNumber || twilioNumber;
 }
-
-// overwrite if deployed
-acctSID = process.env.acctSID || acctSID;
-authToken = process.env.testSID || testSID;
-testToken = process.env.testToken || testToken;
-twilioNumber = process.env.twilioNumber || twilioNumber;
 
 var app = express();
 

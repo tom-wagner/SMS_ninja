@@ -3,7 +3,7 @@ if (!process.env) {
 } else {
   // overwrite variables from config.js if deployed
   var acctSID = process.env.acctSID || acctSID;
-  var authToken = process.env.testSID || authToken;
+  var authToken = process.env.authToken || authToken;
   var testToken = process.env.testToken || testToken;
   var twilioNumber = process.env.twilioNumber || twilioNumber;
 }
