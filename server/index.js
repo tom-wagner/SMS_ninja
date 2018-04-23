@@ -30,11 +30,13 @@ app.post('/SMS', function(req, res) {
       // Posted successfully to DB, now send via Twilio
       twilio.sendSMS(req.body.messageText, '+1' + req.body.recipient, twilioNumber).then((result, err) => {
         if (result.errorCode) {
+          console.log('res error: ', result.errorCode, result.errorMessage)
           res.status(500).send(`Twilio server error: ${result.errorMessage}, please try again later.`);
         } else {
           res.status(200).send(result.body);
         }
       }).catch(err => {
+        console.log('catching twilio error: ', err);
         res.status(500).send(`Twilio server error: ${err}`)
       })
     }
