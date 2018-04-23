@@ -1,12 +1,13 @@
 if (!process.env) {
   var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+} else {
+  // overwrite variables from config.js if deployed
+  var acctSID = process.env.acctSID || acctSID;
+  var authToken = process.env.testSID || authToken;
+  var testToken = process.env.testToken || testToken;
+  var twilioNumber = process.env.twilioNumber || twilioNumber;
 }
 
-// overwrite variables from config.js if deployed
-acctSID = process.env.acctSID || acctSID;
-authToken = process.env.testSID || authToken;
-testToken = process.env.testToken || testToken;
-twilioNumber = process.env.twilioNumber || twilioNumber;
 
 const twilio = require('twilio');
 
