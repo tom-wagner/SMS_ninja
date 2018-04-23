@@ -74,8 +74,9 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch, state) => {
   return {
     handleScheduleMessageSubmit: (values, props) => {
+      console.log('props in handle: ', props);
       const { dateTime, messageText, recipient } = values;
-      const { username } = props;
+      const { username, resetForm } = props;
 
       axios({
         method: 'post',
@@ -85,6 +86,8 @@ const mapDispatchToProps = (dispatch, state) => {
         console.log('result: ', result);
         // Update scheduled messages array
         dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
+        resetForm();
+        window.alert('message sent successfully!');
       }).catch(err => {
         console.log('err: ', err);
       });
