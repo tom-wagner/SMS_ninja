@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { changeView, toggleLogIn, handleLogOut } from '../actions/index.js'
 
 // import AnyComponent from './components/filename.jsx'
+// All required components below:
 import Login from './login.jsx';
 import Main from './main.jsx';
 import Messages from './messages.jsx';
