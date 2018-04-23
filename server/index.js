@@ -82,5 +82,5 @@ app.post('/login', function (req, res) {
 })
 
 app.listen(process.env.PORT || 3000, function() {
-  console.log('listening on port: ', this.address.port(), app.settings.env);
+  console.log('listening on port: ', process.env.PORT || 3000);
 });
