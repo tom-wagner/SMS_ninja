@@ -3,7 +3,10 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 var DB = require('./database.js');
 var twilio = require('./twilio.js');
-var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+
+if (!process.env) {
+  var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+}
 
 // overwrite if deployed
 acctSID = process.env.acctSID || acctSID;
