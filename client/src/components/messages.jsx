@@ -12,6 +12,7 @@ class Messages extends Component {
           <Col xs={8} xsOffset={2}>
             <div className="messages-container">
               <h1 className="form-header">Scheduled Messages</h1>
+              <h4 className="form-header"><i>for user: {this.props.username}</i></h4>
               <ul>
                 {this.props.scheduledMessages.reverse().map((message, id) => {
                   if (message.messageText) {
@@ -39,7 +40,7 @@ class Messages extends Component {
 const mapStateToProps = (state) => {
   return {
     scheduledMessages: state.scheduledMessages,
-    // username: state.username,
+    username: state.username,
     // phoneNumber: state.phoneNumber,
     // isLoggedIn: state.isLoggedIn,
     // previouslySentMessages: state.previouslySentMessages,
