@@ -90,7 +90,9 @@ const mapDispatchToProps = (dispatch, state) => {
         // Update scheduled messages array
         dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
         dispatch(reset(form));
-        window.alert('message sent successfully!');
+        setTimeout(() => {
+          window.alert('message sent successfully!');
+        }, 500);
       }).catch(err => {
         console.log('err: ', err);
       });
