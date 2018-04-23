@@ -74,9 +74,10 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch, state) => {
   return {
     handleScheduleMessageSubmit: (values, props) => {
-      console.log('props in handle: ', props);
+      console.log('this.props in handle: ', this.props);
       const { dateTime, messageText, recipient } = values;
-      const { username, resetForm } = props;
+      const { username } = props;
+      const { resetForm } = this.props;
 
       axios({
         method: 'post',

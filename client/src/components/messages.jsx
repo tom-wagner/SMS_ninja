@@ -12,7 +12,7 @@ class Messages extends Component {
             <div className="messages-container">
               <h1 className="form-header">Scheduled Messages</h1>
               <ul>
-                {this.props.scheduledMessages.map(message => {
+                {this.props.scheduledMessages.reverse().map(message => {
                   if (message.messageText) {
                     let styledNumber = '(' + message.recipient.slice(0, 3) + ') ' + message.recipient.slice(3, 6) + ' - ' + message.recipient.slice(6);
                     
