@@ -1,8 +1,12 @@
 var mongoose = require('mongoose');
 
+if (!process.env.MLAB_URL) {
+  var { MLAB_URL } = require('../config.js')
+}
+
 var DB = mongoose.connection;
 
-mongoose.connect(process.env.MLAB_URL || 'mongodb://localhost/sms_ninja');
+mongoose.connect(process.env.MLAB_URL || MLAB_URL);
 
 DB.on('error', console.error.bind(console, 'connection error:'));
 DB.once('open', function() {
@@ -38,6 +42,7 @@ function addMessage(msgDetails, callback) {
 }
 
 function addUser(userDetails, callback) {
+  console.log('userDetails in DB!!', userDetails);
   User.create(userDetails, err => {
     if (err) {
       callback(err, null);

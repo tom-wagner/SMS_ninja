@@ -21,6 +21,7 @@
   "homepage": "https://github.com/tom-wagner/SMS_ninja#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "history": "^4.7.2",

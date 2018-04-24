@@ -73,11 +73,7 @@ const mapDispatchToProps = (dispatch) => {
       var options = {
         method: 'post',
         url: '/newUser',
-        data: {
-          username, email, phoneNumber,
-          hashedPassword: password,
-          salt: 'TBD',
-        }
+        data: { username, email, phoneNumber, password }
       }
       axios(options).then(result => {
         console.log(result);

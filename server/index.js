@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var axios = require('axios');
 var DB = require('./database.js');
 var twilio = require('./twilio.js');
+var bcrypt = require('bcrypt');
 
 if (!process.env) {
   var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
@@ -42,14 +43,30 @@ app.post('/newUser', function(req, res) {
   // show the user real-time whether username is available
   // hash password using bCrypt or similar
 
-  DB.addUser(req.body, (err, success) => {
+  let userDetails = req.body;
+
+  bcrypt.hash(userDetails.password, 10, (err, hash) => {
     if (err) {
-      console.log('err: ', err);
-      res.status(500).send(err);
+      res.status(500).send('Error hashing password: ', err);
     } else {
-      res.status(200).send('New user successfully posted to DB!');
+      userDetails.hashedPassword = hash;
+      delete userDetails.password;
+
+      console.log('userDetails after hash: ', userDetails);
+
+      // add user to DB
+      DB.addUser(userDetails, (err, success) => {
+        if (err) {
+          console.log('err: ', err);
+          res.status(500).send(err);
+        } else {
+          console.log('success!!');
+          res.status(200).send('New user successfully posted to DB!');
+        }
+      });
     }
-  });
+  })
+
 });
 
 app.post('/login', function (req, res) {
