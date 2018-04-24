@@ -1,7 +1,8 @@
-if (!process.env) {
+// If the app is not running on Heroku it will default to the ../config.js file
+if (!process.env.twilioNumber) {
   var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
 } else {
-  // overwrite variables from config.js if deployed
+  // else overwrite variables from config.js if deployed
   var acctSID = process.env.acctSID || acctSID;
   var authToken = process.env.authToken || authToken;
   var testToken = process.env.testToken || testToken;
