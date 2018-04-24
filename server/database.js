@@ -42,7 +42,6 @@ function addMessage(msgDetails, callback) {
 }
 
 function addUser(userDetails, callback) {
-  console.log('userDetails in DB!!', userDetails);
   User.create(userDetails, err => {
     if (err) {
       callback(err, null);
@@ -78,8 +77,18 @@ function retrieveUserPhoneNumber(username, callback) {
     if (err) {
       callback(err, null);
     } else {
-      console.log(docs);
       callback(err, docs);
+    }
+  });
+}
+
+function retrieveUserHash(username, callback) {
+  // need to update to only send back hashed password in response to query
+  User.findOne({username: username}, (err, docs) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, docs.hashedPassword);
     }
   });
 }
@@ -88,4 +97,5 @@ exports.addMessage = addMessage;
 exports.addUser = addUser;
 exports.retrieveUserMessages = retrieveUserMessages;
 exports.retrieveUserPhoneNumber = retrieveUserPhoneNumber
+exports.retrieveUserHash = retrieveUserHash;
 exports.DB = DB;
