@@ -7,6 +7,47 @@ import axios from 'axios';
 class SignUpForm extends Component {
   render() {
     const { error, handleSubmit, pristine, reset, submitting, handleSignUp } = this.props;
+
+    const required = value => {
+      console.log('value in required: ', value);
+      console.log('result of ternary in required: ', value ? undefined : 'Required');
+      return value ? undefined : 'Required';
+    }
+
+    const email = value => {
+      console.log('value in email: ', value);
+      console.log('value of ternary in email: ', value ? 'Invalid email address' : undefined);
+      return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email address' : undefined;
+    }
+
+    const renderField = ({
+      className,
+      input,
+      label,
+      type,
+      meta: { touched, error, warning }
+    }) => (
+      <div>
+        <label>{label}</label>
+        <div>
+          <input {...input} placeholder={label} type={type} className={className} />
+          {/* as of now warnings and errors are not being thrown when they should be! */}
+          {console.log({
+            label: label,
+            type: type,
+            touched: touched,
+            warning: warning,
+            error: error
+          })}
+          {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        </div>
+      </div>
+    );
+
+    // TO DO TOMORROW:
+      // TRY IN CodeSandbox LIKE THE EXAMPLE DID
+      // ASK AROUND IF ANYONE HAS USED REDUX FORM PREVIOUSLY
+
     return (
       <div className="form-container">
         <h1 className="form-header">Sign Up</h1>
@@ -17,6 +58,8 @@ class SignUpForm extends Component {
             component={renderField}
             label="Username"
             className="one-line-input"
+            validate={required}
+            /* warn={required} */
           />
           <Field 
             name="password"
@@ -24,6 +67,7 @@ class SignUpForm extends Component {
             component={renderField}
             label="Password"
             className="one-line-input"
+            validate={required}
           />
           <Field 
             name="email"
@@ -31,6 +75,7 @@ class SignUpForm extends Component {
             component={renderField}
             label="Email"
             className="one-line-input"
+            validate={email}
           />
           <Field 
             name="phoneNumber"
@@ -44,25 +89,15 @@ class SignUpForm extends Component {
             <button type="submit" disabled={submitting} className="btn-default">
               Sign Up
             </button>
-            <button type="button" disabled={submitting} onClick={reset} className="btn-default secondary-btn">
+            <button type="button" disabled={pristine || submitting} onClick={reset} className="btn-default secondary-btn">
               Clear Values
             </button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
-
-const renderField = ({ className, input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} className={className} />
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-);
 
 const mapDispatchToProps = (dispatch) => {
   return {
