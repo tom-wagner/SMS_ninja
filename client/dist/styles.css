@@ -18,7 +18,7 @@
   width: 50%;
   box-shadow: 2px 2px 2px slategray;
   border: 1px solid black;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .text-box {
@@ -79,4 +79,12 @@ li:last-child {
 
 .bottom-li {
   margin-bottom: 10px;
+}
+
+.error, .warning {
+  font-size: 1.2em;
+  color: red;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  margin-left: 5px;
+  display: block;
 }
