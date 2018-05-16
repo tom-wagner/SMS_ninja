@@ -96,7 +96,7 @@ const mapDispatchToProps = (dispatch, state) => {
       }).catch(err => {
         console.log('err: ', err);
       });
-
+      
       // toDoLater! -- reset form to be blank upon success
       // toDoLater! -- improve error handling
     }

@@ -1,3 +1,6 @@
+# Bundle
+client/dist/bundle.js
+
 # API Keys
 config.js
 

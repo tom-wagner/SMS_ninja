@@ -79,4 +79,4 @@ export function view(state = 'login', action) {
     default:
       return state;
   }
-};
+}

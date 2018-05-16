@@ -5,7 +5,7 @@ var DB = require('./database.js');
 var twilio = require('./twilio.js');
 var bcrypt = require('bcrypt');
 
-if (!process.env) {
+if (!process.env.twilioNumber) {
   var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
 } else {
   var twilioNumber = process.env.twilioNumber || twilioNumber;

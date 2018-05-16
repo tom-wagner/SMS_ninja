@@ -10,7 +10,7 @@ mongoose.connect(process.env.MLAB_URL || MLAB_URL);
 
 DB.on('error', console.error.bind(console, 'connection error:'));
 DB.once('open', function() {
-  'connected to MongoDB!!';
+  console.log('connected to MongoDB!!');
 });
 
 let userSchema = mongoose.Schema({
