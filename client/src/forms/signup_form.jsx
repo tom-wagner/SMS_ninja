@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-
-
-const required = value => {
-  return value ? undefined : 'Required';
-};
-
-const maxLength = max => value => {
-  return value && value.length > max ? `Must be ${max} characters or less` : undefined;
-};
-
-const maxLength15 = maxLength(15);
-
-const minLength = min => value => {
-  return value && value.length < min ? `Must be at least ${min} characters long` : undefined;
-};
-
-const minLength8 = minLength(8);
-
-const email = value => {
-  return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email address' : undefined;
-};
+import {
+  email,
+  maxLength15,
+  minLength8,
+  required,
+  atLeastOneUpperCaseLetter,
+  atLeastOneLowerCaseLetter,
+  atLeastOneSpecialCharacter,
+  atLeastOneNumber,
+} from './form_validation/signup_form_validation.js';
 
 const renderField = ({ className, input, label, placeholder, type, meta: { touched, error, warning } }) => (
   <div>
@@ -79,7 +68,7 @@ const SignUpForm = (props) => {
         label="Password"
         className="one-line-input"
         validate={[required, maxLength15]}
-        warn={[minLength8, required, maxLength15]}
+        warn={[minLength8, required, maxLength15, atLeastOneUpperCaseLetter, atLeastOneLowerCaseLetter, atLeastOneNumber, atLeastOneSpecialCharacter]}
       />
       <Field
         name="email"
