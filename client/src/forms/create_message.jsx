@@ -118,6 +118,10 @@ CreateMessageForm = connect(mapStateToProps, mapDispatchToProps)(CreateMessageFo
 
 export default reduxForm({
   form: 'CreateMessageForm',
+  initialValues: {
+    messageText: 'this is a text',
+    // dateTime: new Date(),
+  }
   /*validationFunction*/
   /*warningFunction*/
 })(CreateMessageForm);

@@ -4,6 +4,7 @@ var axios = require('axios');
 var DB = require('./database.js');
 var twilio = require('./twilio.js');
 var bcrypt = require('bcrypt');
+var CRON = require('./fetcher.js');
 
 if (!process.env.twilioNumber) {
   var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');

@@ -1,3 +1,5 @@
+const twilio = require('twilio');
+
 // If the app is not running on Heroku it will default to the ../config.js file
 if (!process.env.twilioNumber) {
   var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
@@ -8,8 +10,6 @@ if (!process.env.twilioNumber) {
   var testToken = process.env.testToken || testToken;
   var twilioNumber = process.env.twilioNumber || twilioNumber;
 }
-
-const twilio = require('twilio');
 
 var client = new twilio(acctSID, authToken);
 

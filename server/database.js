@@ -59,17 +59,6 @@ function retrieveUserMessages(username, callback) {
       callback(null, docs);
     }
   });
-
-  // NOT WORKING BUT CLOSE:
-  // Message.$where('this.username ==== "twagner55"')
-  //        .$where('this.messageText !== "undefined"')
-  //        .exec( (err, docs) => {
-  //   if (err) {
-  //     callback(err, null);
-  //   } else {
-  //     callback(null, docs);
-  //   }
-  // });
 }
 
 function retrieveUserPhoneNumber(username, callback) {
@@ -93,9 +82,26 @@ function retrieveUserHash(username, callback) {
   });
 }
 
+function retrieveMessagesToSend(date) {
+  let minDate = date - 30000;
+  let maxDate = date + 30000;
+  console.log('min and max: ', { minDate, maxDate });
+
+  return Message.find({ dateTime: {$gt: minDate, $lt: maxDate }}).exec();
+}
+
+function deleteSentMessages(messages) {
+  let messageIDs = messages.map(msg => msg._id);
+  console.log('messageIDs to be deleted: ', messageIDs);
+
+  return Message.deleteMany({ _id: { $in: messageIDs }}).exec();
+}
+
 exports.addMessage = addMessage;
 exports.addUser = addUser;
 exports.retrieveUserMessages = retrieveUserMessages;
 exports.retrieveUserPhoneNumber = retrieveUserPhoneNumber
 exports.retrieveUserHash = retrieveUserHash;
+exports.retrieveMessagesToSend = retrieveMessagesToSend;
+exports.deleteSentMessages = deleteSentMessages;
 exports.DB = DB;
