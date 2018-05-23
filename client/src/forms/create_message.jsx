@@ -3,6 +3,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { handleScheduleMessageSubmit, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
 
 class CreateMessageForm extends Component {
   render() {
@@ -16,8 +17,6 @@ class CreateMessageForm extends Component {
       form,
       shouldSendNow
     } = this.props;
-
-    console.log({ shouldSendNow });
 
     return (
       <div className="form-container">
@@ -59,7 +58,7 @@ class CreateMessageForm extends Component {
             </div>
           </div>
           <br/>
-          {shouldSendNow === 'sendNow' && <div>
+          {shouldSendNow === 'sendLater' && <div>
             <Field 
               name="dateTime"
               type="datetime-local"
@@ -69,6 +68,7 @@ class CreateMessageForm extends Component {
             />
           </div>}
           {error && <strong>{error}</strong>}
+          <br/>
           <div>
             <button type="submit" disabled={submitting} className="btn-default" >
               Schedule Message
@@ -106,7 +106,8 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch, state) => {
   return {
     handleScheduleMessageSubmit: (values, props) => {
-      // console.log('props in handle: ', props);
+      console.log({ values, props });
+
       const { dateTime, messageText, recipient } = values;
       const { username, reset, form } = props;
 
@@ -129,17 +130,6 @@ const mapDispatchToProps = (dispatch, state) => {
       // toDoLater! -- improve error handling
     }
   };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    username: state.username,
-    phoneNumber: state.phoneNumber,
-    isLoggedIn: state.isLoggedIn,
-    scheduledMessages: state.scheduledMessages,
-    previouslySentMessages: state.previouslySentMessages,
-    view: state.view,
-  }
 };
 
 CreateMessageForm = reduxForm({
@@ -166,6 +156,6 @@ CreateMessageForm = connect(
       shouldSendNow,
     };
   }
-)(CreateMessageForm);
+, mapDispatchToProps)(CreateMessageForm);
 
 export default CreateMessageForm;
