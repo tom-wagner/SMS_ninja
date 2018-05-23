@@ -103,10 +103,3 @@ const SignUpForm = (props) => {
 };
 
 export default reduxForm({form: 'SignUpForm'})(SignUpForm);
-
-// USE LATER IF NEEDED ---> flip null back to mapStateToProps within connect() below
-// const mapStateToProps = (state) => {
-//   return {
-
-//   }
-// }

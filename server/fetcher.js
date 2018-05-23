@@ -21,8 +21,7 @@ let sendMessages = messages => {
         to: msg.recipient,
         from: twilioNumber,
         body: msg.messageText
-      })
-      // .then(() => messages);
+      });
     }));
 };
 
@@ -49,5 +48,5 @@ let timer = new CRON.CronJob({
       .catch(err => () => console.log('err: ', err));
   },
   start: true,
-  timeZone: 'America/New_York'
+  timeZone: 'America/New_York',
 });

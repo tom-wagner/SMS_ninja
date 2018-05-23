@@ -25,9 +25,6 @@ export const handleScheduleMessageSubmit = (msgData) => { // username, phoneNumb
 };
 
 export const handleSignUp = (values) => {
-  console.log('values from sign up form: ', values);
-  // TO DO LATER: Add user to database
-
   return {
     type: DID_SIGN_UP,
     payload: true

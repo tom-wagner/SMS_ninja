@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { handleScheduleMessageSubmit, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
 class CreateMessageForm extends Component {
   render() {
-    console.log('this.props in CreateMessageForm', this.props);
-    const { error, handleSubmit, pristine, reset, submitting, handleScheduleMessageSubmit, form } = this.props;
-    console.log('form name:', form);
+    const {
+      error,
+      handleSubmit,
+      pristine,
+      reset,
+      submitting,
+      handleScheduleMessageSubmit,
+      form,
+      shouldSendNow
+    } = this.props;
+
+    console.log({ shouldSendNow });
+
     return (
       <div className="form-container">
-        <h1 className="form-header">Schedule a Message</h1>
+        <h1 className="form-header">Schedule or Send a Message</h1>
         {/* passing this.props as the 2nd argument to the submitHandler below in order to access state */}
         <form
           onSubmit={ handleSubmit(values => { handleScheduleMessageSubmit(values, this.props) })}
@@ -31,16 +41,35 @@ class CreateMessageForm extends Component {
             label="Message Text"
             className="one-line-input text-box"
           />
-          <Field 
-            name="dateTime"
-            type="datetime-local"
-            component={renderField}
-            label="Time/date to send - BETA... aka NOT WORKING -- msg sends now"
-            className="one-line-input"
-          />
+          <div>
+            <br/>
+            <label>Delivery time:</label>
+            <div>
+              <label>
+                <Field name="sendTime" component="input" type="radio" value="sendNow" />
+                {' '}
+                Send Now
+              </label>
+              {' '}{' '}{' '}{' '}{' '}{' '}
+              <label>
+                <Field name="sendTime" component="input" type="radio" value="sendLater" />
+                {' '}
+                Send Later
+              </label>
+            </div>
+          </div>
+          <br/>
+          {shouldSendNow === 'sendNow' && <div>
+            <Field 
+              name="dateTime"
+              type="datetime-local"
+              component={renderField}
+              label="Time and Date to Send"
+              className="one-line-input"
+            />
+          </div>}
           {error && <strong>{error}</strong>}
           <div>
-            {/* need to clear values on submit*/}
             <button type="submit" disabled={submitting} className="btn-default" >
               Schedule Message
             </button>
@@ -86,12 +115,11 @@ const mapDispatchToProps = (dispatch, state) => {
         url: '/SMS',
         data: { username, messageText, recipient, dateTime }
       }).then(result => {
-        console.log('result: ', result);
         // Update scheduled messages array
         dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
         dispatch(reset(form));
         setTimeout(() => {
-          window.alert('message sent successfully!');
+          window.alert('message scheduled successfully!');
         }, 500);
       }).catch(err => {
         console.log('err: ', err);
@@ -112,16 +140,32 @@ const mapStateToProps = (state) => {
     previouslySentMessages: state.previouslySentMessages,
     view: state.view,
   }
-}
+};
 
-CreateMessageForm = connect(mapStateToProps, mapDispatchToProps)(CreateMessageForm);
-
-export default reduxForm({
+CreateMessageForm = reduxForm({
   form: 'CreateMessageForm',
-  initialValues: {
-    messageText: 'this is a text',
+  // initialValues: {
     // dateTime: new Date(),
-  }
+  // }
   /*validationFunction*/
   /*warningFunction*/
 })(CreateMessageForm);
+
+const selector = formValueSelector('CreateMessageForm');
+
+CreateMessageForm = connect(
+  state => {
+    const shouldSendNow = selector(state, 'sendTime');
+    return {
+      username: state.username,
+      phoneNumber: state.phoneNumber,
+      isLoggedIn: state.isLoggedIn,
+      scheduledMessages: state.scheduledMessages,
+      previouslySentMessages: state.previouslySentMessages,
+      view: state.view,
+      shouldSendNow,
+    };
+  }
+)(CreateMessageForm);
+
+export default CreateMessageForm;
