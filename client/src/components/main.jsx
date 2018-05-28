@@ -17,6 +17,4 @@ class Main extends Component {
   }
 }
 
-
-
 export default connect(null, null)(Main);

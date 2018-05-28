@@ -18,23 +18,20 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/SMS', function(req, res) {
-  // toDoLater! -- Schedule SMS delivery using Cron ---> https://github.com/kelektiv/node-cron (see WebHistorian for example use of Cron)
-
   console.log('req.body in POST /sms: \n', req.body);
+
   DB.addMessage(req.body, (err, success) => {
     if (err) {
       res.status(500).send('error posting to DB: ', err);
     } else {
-      // Posted successfully to DB, now send via Twilio
-      twilio.sendSMS(req.body.messageText, '+1' + req.body.recipient, twilioNumber).then((result, err) => {
-        if (result.errorCode) {
-          res.status(500).send(`Twilio server error: ${result.errorMessage}, please try again later.`);
-        } else {
-          res.status(200).send(result.body);
-        }
-      }).catch(err => {
-        res.status(500).send(`Twilio server error: ${err}`)
-      })
+      
+      // Posted successfully to DB, now send via Twilio if the user wants it to be sent immediately
+      if (req.body.sendTime === 'sendNow') {
+        twilio
+          .sendSMS(req.body.messageText, '+1' + req.body.recipient, twilioNumber)
+          .then(result => res.status(200).send(result.body))
+          .catch(err => res.status(500).send(`Twilio server error: ${err}`))
+      }
     }
   });
 });

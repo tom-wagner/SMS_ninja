@@ -71,7 +71,7 @@ class CreateMessageForm extends Component {
           <br/>
           <div>
             <button type="submit" disabled={submitting} className="btn-default" >
-              Schedule Message
+              Send/Schedule Message
             </button>
             <button type="button" disabled={submitting} onClick={reset} className="btn-default secondary-btn">
               Clear Values
@@ -106,28 +106,21 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch, state) => {
   return {
     handleScheduleMessageSubmit: (values, props) => {
-      console.log({ values, props });
-
-      const { dateTime, messageText, recipient } = values;
+      const { dateTime, messageText, recipient, sendTime } = values;
       const { username, reset, form } = props;
 
-      axios({
-        method: 'post',
-        url: '/SMS',
-        data: { username, messageText, recipient, dateTime }
-      }).then(result => {
-        // Update scheduled messages array
-        dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
-        dispatch(reset(form));
-        setTimeout(() => {
-          window.alert('message scheduled successfully!');
-        }, 500);
-      }).catch(err => {
-        console.log('err: ', err);
-      });
-      
-      // toDoLater! -- reset form to be blank upon success
-      // toDoLater! -- improve error handling
+      axios({ method: 'post', url: '/SMS', data: { username, messageText, recipient, dateTime, sendTime }})
+        .then(() => {
+          // Update scheduled messages array
+          dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
+          dispatch(reset(form));
+          setTimeout(() => {
+            window.alert('message scheduled successfully!');
+          }, 500);
+        })
+        .catch(err => {
+          window.alert('Error scheduling/sending message: ', err);
+        });
     }
   };
 };
