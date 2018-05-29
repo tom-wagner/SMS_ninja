@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { toastr } from 'react-redux-toastr';
 import { handleSignUp, changeView } from '../actions/index.js';
 import SignUpForm from '../forms/signup_form.jsx';
 
@@ -31,21 +32,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleSignUp: (values) => {
-      // Add to users table in the database
-      console.log('values!!', values);
-
       const { username, email, phoneNumber, password} = values;
+      var options = { method: 'post', url: '/newUser', data: { username, email, phoneNumber, password }}
 
-      var options = {
-        method: 'post',
-        url: '/newUser',
-        data: { username, email, phoneNumber, password }
-      }
-      axios(options).then(result => {
-        console.log(result);
-      }).catch(err => {
-        console.log(err);
-      });
+      axios(options)
+        .then(result => toastr.success('Sign up successful!', 'Log in to begin sending and scheduling messages'))
+        .catch(err => toastr.error('Serer error, please try again.'));
       
       dispatch(handleSignUp(values));
       

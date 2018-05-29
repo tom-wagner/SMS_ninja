@@ -3,7 +3,6 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { handleScheduleMessageSubmit, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
 import {toastr} from 'react-redux-toastr';
 
 class CreateMessageForm extends Component {
