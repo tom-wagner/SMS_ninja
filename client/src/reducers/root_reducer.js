@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { username, phoneNumber, toggleLogIn, scheduledMessages, previouslySentMessages, view } from './all_reducers.js';
 import { reducer as reduxFormReducer } from 'redux-form';
+import { reducer as toastrReducer } from 'react-redux-toastr'
 
 export default combineReducers({
   username,
@@ -9,5 +10,6 @@ export default combineReducers({
   scheduledMessages,
   previouslySentMessages,
   view, // DONE
-  form: reduxFormReducer // DONE
+  form: reduxFormReducer, // DONE
+  toastr: toastrReducer,
 });

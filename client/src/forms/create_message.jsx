@@ -4,6 +4,7 @@ import { handleScheduleMessageSubmit, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
+import {toastr} from 'react-redux-toastr';
 
 class CreateMessageForm extends Component {
   render() {
@@ -110,16 +111,19 @@ const mapDispatchToProps = (dispatch, state) => {
       const { username, reset, form } = props;
 
       axios({ method: 'post', url: '/SMS', data: { username, messageText, recipient, dateTime, sendTime }})
-        .then(() => {
+        .then(resp => {
+          console.log({ resp });
           // Update scheduled messages array
           dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
           dispatch(reset(form));
-          setTimeout(() => {
-            window.alert('message scheduled successfully!');
-          }, 500);
+          
+          // consider using react-alert here
+          // window.alert('message scheduled successfully!');
+          toastr.success(resp.data);
         })
         .catch(err => {
-          window.alert('Error scheduling/sending message: ', err);
+          console.log({ err });
+          toastr.error('Error!', err.response.data);
         });
     }
   };

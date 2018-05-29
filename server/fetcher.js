@@ -3,7 +3,7 @@ var DB = require('./database.js');
 var CRON = require('cron');
 
 if (!process.env.twilioNumber) {
-  var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+  var { acctSID, authToken, testSID, testToken, twilioNumber } = require('../config.js');
 } else {
   var twilioNumber = process.env.twilioNumber || twilioNumber;
 }

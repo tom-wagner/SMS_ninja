@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// import AnyComponent from './components/filename.jsx'
 import App from './components/app.jsx';
+
+// Alerts via ReduxToastr
+import ReduxToastr from 'react-redux-toastr';
 
 // REDUX:
 import { Provider } from 'react-redux';
@@ -17,7 +18,17 @@ console.log('Initial state: ', store.getState());
 
 ReactDOM.render(
   <Provider store={store} >
-    <App />
+    <div>
+      <App />
+      <ReduxToastr
+        timeOut={2500}
+        newestOnTop={false}
+        preventDuplicates
+        position="top-right"
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        />
+    </div>
   </Provider>,
   document.getElementById('app')
 );

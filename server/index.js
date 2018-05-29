@@ -7,9 +7,9 @@ var bcrypt = require('bcrypt');
 var CRON = require('./fetcher.js');
 
 if (!process.env.twilioNumber) {
-  var {acctSID, authToken, testSID, testToken, twilioNumber} = require('../config.js');
+  var { twilioNumber } = require('../config.js');
 } else {
-  var twilioNumber = process.env.twilioNumber || twilioNumber;
+  var twilioNumber = process.env.twilioNumber;
 }
 
 var app = express();
@@ -18,20 +18,27 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/SMS', function(req, res) {
-  console.log('req.body in POST /sms: \n', req.body);
-
   DB.addMessage(req.body, (err, success) => {
     if (err) {
-      res.status(500).send('error posting to DB: ', err);
-    } else {
-      
-      // Posted successfully to DB, now send via Twilio if the user wants it to be sent immediately
+      // Message not saved to DB but will be sent now anyways if user requested immediately delivery
       if (req.body.sendTime === 'sendNow') {
         twilio
           .sendSMS(req.body.messageText, '+1' + req.body.recipient, twilioNumber)
-          .then(result => res.status(200).send(result.body))
-          .catch(err => res.status(500).send(`Twilio server error: ${err}`))
+          .then(result => res.status(200).send('Message delivered successfully but not saved to database.'))
+          .catch(err => res.status(500).send(`Twilio ${err}`));
+      } else {
+        res.status(500).send('Failure scheduling message, please try again');
       }
+    }
+
+    // Message saved successfully to DB but will be sent now anyways if user requested immediately delivery
+    if (req.body.sendTime === 'sendNow') {
+      twilio
+        .sendSMS(req.body.messageText, '+1' + req.body.recipient, twilioNumber)
+        .then(result => res.status(200).send('Message delivered successfully!'))
+        .catch(err => res.status(500).send(`Twilio ${err}`));
+    } else {
+      res.status(200).send('Message scheduled successfully!');
     }
   });
 });

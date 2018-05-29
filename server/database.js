@@ -83,17 +83,17 @@ function retrieveUserHash(username, callback) {
 }
 
 function retrieveMessagesToSend(date) {
-  let minDate = date - 30000;
-  let maxDate = date + 30000;
+  // added an extra second to address Date.now() rounding issues
+  // messages will not be accidentally sent twice as they are deleted once sent
+  let minDate = date - 31000;
+  let maxDate = date + 31000;
   console.log('min and max: ', { minDate, maxDate });
-
   return Message.find({ dateTime: {$gt: minDate, $lt: maxDate }}).exec();
 }
 
 function deleteSentMessages(messages) {
   let messageIDs = messages.map(msg => msg._id);
   console.log('messageIDs to be deleted: ', messageIDs);
-
   return Message.deleteMany({ _id: { $in: messageIDs }}).exec();
 }
 
