@@ -104,6 +104,19 @@ app.post('/login', function (req, res) {
   });
 });
 
+app.delete('/message', function (req, res) {
+  console.log({ req });
+  DB.deleteMessage(req.query._id)
+    .then(result => {
+      console.log({ result });
+      res.status(200).send('success!');
+    })
+    .catch(err => {
+      console.log({ err });
+      res.status(200).send('error!');
+    });
+});
+
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port: ', process.env.PORT || 3000);
 });

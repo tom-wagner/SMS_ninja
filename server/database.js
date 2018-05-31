@@ -97,6 +97,10 @@ function deleteSentMessages(messages) {
   return Message.deleteMany({ _id: { $in: messageIDs }}).exec();
 }
 
+function deleteMessage(_id) {
+  return Message.deleteOne({ _id });
+}
+
 exports.addMessage = addMessage;
 exports.addUser = addUser;
 exports.retrieveUserMessages = retrieveUserMessages;
@@ -104,4 +108,5 @@ exports.retrieveUserPhoneNumber = retrieveUserPhoneNumber
 exports.retrieveUserHash = retrieveUserHash;
 exports.retrieveMessagesToSend = retrieveMessagesToSend;
 exports.deleteSentMessages = deleteSentMessages;
+exports.deleteMessage = deleteMessage;
 exports.DB = DB;

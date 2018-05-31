@@ -7,27 +7,35 @@ import {
   NAV_TO_LOG_IN,
   NAV_TO_SIGN_UP,
   NAV_TO_MAIN,
-  NAV_TO_MESSAGES
+  NAV_TO_MESSAGES,
+  DELETE_MESSAGE,
 } from '../action_types.js';
 
 export const fetchMessages = username => {
   return {
     type: DID_GET_MESSAGES,
-    payload: null
+    payload: null,
   };
 };
 
 export const handleScheduleMessageSubmit = (msgData) => { // username, phoneNumber, message, dateTime
   return {
     type: DID_SCHEDULE_MESSAGE,
-    payload: msgData
+    payload: msgData,
+  };
+};
+
+export const deleteMessage = (idx) => {
+  return {
+    type: DELETE_MESSAGE,
+    payload: idx,
   };
 };
 
 export const handleSignUp = (values) => {
   return {
     type: DID_SIGN_UP,
-    payload: true
+    payload: true,
   };
 };
 
@@ -42,7 +50,7 @@ export const handleLogin = (username, password, phoneNumber, messages) => {
   // flip isLoggedIn to true
   return {
     type: DID_LOG_IN,
-    payload: { username, password, phoneNumber, messages }
+    payload: { username, password, phoneNumber, messages },
   };
 };
 

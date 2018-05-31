@@ -7,7 +7,8 @@ import {
   NAV_TO_LOG_IN,
   NAV_TO_SIGN_UP,
   NAV_TO_MAIN,
-  NAV_TO_MESSAGES
+  NAV_TO_MESSAGES,
+  DELETE_MESSAGE
 } from '../action_types.js';
 
 export function username(state = '', action) {
@@ -52,6 +53,8 @@ export function scheduledMessages(state = [], action) {
       return [];
     case DID_SCHEDULE_MESSAGE:
       return state.concat([action.payload]);
+    case DELETE_MESSAGE:
+      return [ ...state.slice(0, action.payload) , ...state.slice(action.payload + 1) ];
     default:
       return state;
   }
