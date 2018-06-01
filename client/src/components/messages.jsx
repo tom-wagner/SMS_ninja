@@ -25,7 +25,9 @@ class Messages extends Component {
                           <li>Message: {message.messageText}</li>
                           <li className="bottom-li"><i>Scheduled time: {date}</i></li>
                         </ul>
-                        <button className="bottom-li" onClick={() => this.props.deleteMessage(message._id, idx)}>Delete Message</button>
+                        <button type="button" className="bottom-li btn-danger" /*pull-right*/ onClick={() => this.props.deleteMessage(message._id, idx)}>
+                          <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
                       </li>
                     );
                   }

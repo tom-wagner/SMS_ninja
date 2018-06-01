@@ -52,7 +52,7 @@ function addUser(userDetails, callback) {
 }
 
 function retrieveUserMessages(username, callback) {
-  Message.find({ username: username }, (err, docs) => {
+  Message.find({ username: username }).sort({ dateTime: -1 }).exec((err, docs) => {
     if (err) {
       callback(err, null);
     } else {
