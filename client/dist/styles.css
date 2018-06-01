@@ -55,36 +55,38 @@ h1 {
   border: 1px solid red; */
 }
 
-.messages-container > h1, .messages-container > h4 {
-  text-align: center;
-}
-
-.messages-container > ul {
-  background-color: #d0d3d8;
-  border-radius: 15px;
-  /* border: 1px solid black; */
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.ind-msg {
-  border-bottom: 1px solid black;
-  margin-bottom: 10px;
-}
-
-li:last-child {
-  border-bottom: none !important;
-  /* margin-bottom: 0 !important; */
-}
-
-.bottom-li {
-  margin-bottom: 10px;
-}
-
 .error, .warning {
   font-size: 1.2em;
   color: red;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   margin-left: 5px;
   display: block;
+}
+
+.float-right {
+  float: right;
+}
+
+.clear {
+  clear:both;
+}
+
+.ind-msg {
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+  margin: 0 10px;
+}
+
+.message-line-item {
+  padding-bottom: 5px;
+}
+
+.messages-container > .msg-list {
+  background-color: #d0d3d8;
+  border-radius: 15px;
+  border: 1px solid black;
+}
+
+.messages-container > h1, .messages-container > h4 {
+  text-align: center;
 }

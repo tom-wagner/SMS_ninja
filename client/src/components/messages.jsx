@@ -14,23 +14,27 @@ class Messages extends Component {
             <div className="messages-container">
               <h1 className="form-header">Scheduled Messages</h1><br/>
               <h4 className="form-header">For user: {this.props.username}</h4>
-              <ul>
+              <div className = "msg-list">
                 {this.props.scheduledMessages.reverse().map((message, idx) => {
                   if (message.messageText) {
                     let styledNumber = '(' + message.recipient.slice(0, 3) + ') ' + message.recipient.slice(3, 6) + ' - ' + message.recipient.slice(6);
                     let date = moment(message.dateTime).format('MMMM Do YYYY, h:mm a');
                     return (
-                      <li key={idx} className="ind-msg"><b>To: {styledNumber}</b>
-                        <ul>
-                          <li>Message: {message.messageText}</li>
-                          <li className="bottom-li"><i>Scheduled time: {date}</i></li>
-                        </ul>
-                        <button className="bottom-li" onClick={() => this.props.deleteMessage(message._id, idx)}>Delete Message</button>
-                      </li>
+                      <div className="ind-msg" key={ message._id }>
+                        <span className="message-line-item"><b>To: {styledNumber}</b></span>
+                        <button className="float-right btn-lg btn-danger" onClick={() => this.props.deleteMessage(message._id, idx)}>
+                          <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                        <br/>
+                        <span className="message-line-item">Message: { message.messageText }</span>
+                        <br/>
+                        <span><i>Scheduled time: {date}</i></span> 
+                        <div className="clear"></div>
+                      </div>
                     );
                   }
                 })}
-              </ul>
+              </div>
             </div>
           </Col>
         </Row>
