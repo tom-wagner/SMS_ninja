@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { deleteMessage } from '../actions/index.js';
+import { deleteMessage, updateMessages } from '../actions/index.js';
 import moment from 'moment';
 import axios from 'axios';
 
 class Messages extends Component {
+  componentDidMount() {
+    console.log('t.p: ', this.props);
+  }
+
   render() {
     return (
       <div>
@@ -15,7 +19,7 @@ class Messages extends Component {
               <h1 className="form-header">Scheduled Messages</h1><br/>
               <h4 className="form-header">For user: {this.props.username}</h4>
               <div className = "msg-list">
-                {this.props.scheduledMessages.reverse().map((message, idx) => {
+                {this.props.scheduledMessages.map((message, idx) => {
                   if (message.messageText) {
                     let styledNumber = '(' + message.recipient.slice(0, 3) + ') ' + message.recipient.slice(3, 6) + ' - ' + message.recipient.slice(6);
                     let date = moment(message.dateTime).format('MMMM Do YYYY, h:mm a');
@@ -51,8 +55,8 @@ const mapStateToProps = (state) => {
     // isLoggedIn: state.isLoggedIn,
     // previouslySentMessages: state.previouslySentMessages,
     // view: state.view,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -67,8 +71,20 @@ const mapDispatchToProps = (dispatch) => {
           // rudimentary error handling:
           window.alert('Error deleting message from the database, please try again.')
         });
-    }
+    },
+    getMessages: (username) => {
+      axios
+        .get('/messages', { params: { username }})
+        .then(messages => {
+          dispatch(updateMessages(messages.data));
+        })
+        .catch(err => {
+          // rudimentary error handling:
+          console.log({ err });
+          window.alert('Unable to fetch scheduled messages, please try again later.');
+        })
+    },
   };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);

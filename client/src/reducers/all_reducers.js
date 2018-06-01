@@ -8,7 +8,8 @@ import {
   NAV_TO_SIGN_UP,
   NAV_TO_MAIN,
   NAV_TO_MESSAGES,
-  DELETE_MESSAGE
+  DELETE_MESSAGE,
+  UPDATED_MESSAGES
 } from '../action_types.js';
 
 export function username(state = '', action) {
@@ -47,12 +48,11 @@ export function toggleLogIn(state = false, action) {
 
 export function scheduledMessages(state = [], action) {
   switch (action.type) {
-    case DID_LOG_IN:
-      return action.payload.messages;
+    case UPDATED_MESSAGES:
+      console.log('action.payload: ', action.payload);
+      return action.payload;
     case DID_LOG_OUT:
       return [];
-    case DID_SCHEDULE_MESSAGE:
-      return state.concat([action.payload]);
     case DELETE_MESSAGE:
       return [ ...state.slice(0, action.payload) , ...state.slice(action.payload + 1) ];
     default:

@@ -104,6 +104,16 @@ app.post('/login', function (req, res) {
   });
 });
 
+app.get('/messages', function (req, res) {
+  DB.retrieveUserMessages(req.query.username, (err, messages) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(messages);
+    }
+  });
+});
+
 app.delete('/message', function (req, res) {
   console.log({ req });
   DB.deleteMessage(req.query._id)

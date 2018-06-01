@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { handleScheduleMessageSubmit, changeView } from '../actions/index.js';
+import { handleScheduleMessageSubmit, changeView, updateMessages } from '../actions/index.js';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {toastr} from 'react-redux-toastr';
+import { toastr } from 'react-redux-toastr';
 
 class CreateMessageForm extends Component {
+  componentDidMount() {
+    this.props.getMessages(this.props.username)
+  }
+
   render() {
     const {
       error,
@@ -111,20 +115,31 @@ const mapDispatchToProps = (dispatch, state) => {
 
       axios({ method: 'post', url: '/SMS', data: { username, messageText, recipient, dateTime, sendTime }})
         .then(resp => {
-          console.log({ resp });
-          // Update scheduled messages array
-          dispatch(handleScheduleMessageSubmit({ username, recipient, messageText, dateTime }));
           dispatch(reset(form));
-          
-          // consider using react-alert here
-          // window.alert('message scheduled successfully!');
           toastr.success(resp.data);
+          
+          axios
+            .get('/messages', { params: { username } })
+            .then(messages => dispatch(updateMessages(messages.data)))
         })
         .catch(err => {
           console.log({ err });
           toastr.error('Error!', err.response.data);
         });
-    }
+    },
+    getMessages: (username) => {
+      axios
+        .get('/messages', { params: { username }})
+        .then(messages => {
+          console.log({ messages });
+          dispatch(updateMessages(messages.data));
+        })
+        .catch(err => {
+          // rudimentary error handling:
+          console.log({ err });
+          window.alert('Unable to fetch scheduled messages, please try again later.');
+        })
+    },
   };
 };
 

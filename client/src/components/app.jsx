@@ -11,7 +11,6 @@ import Messages from './messages.jsx';
 import SignUp from './signup.jsx';
 
 class App extends Component {
-          
   render() {
     let divToRender = null;
     let view = this.props.view;

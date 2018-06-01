@@ -9,6 +9,7 @@ import {
   NAV_TO_MAIN,
   NAV_TO_MESSAGES,
   DELETE_MESSAGE,
+  UPDATED_MESSAGES,
 } from '../action_types.js';
 
 export const fetchMessages = username => {
@@ -29,6 +30,13 @@ export const deleteMessage = (idx) => {
   return {
     type: DELETE_MESSAGE,
     payload: idx,
+  };
+};
+
+export const updateMessages = (messages) => {
+  return {
+    type: UPDATED_MESSAGES,
+    payload: messages,
   };
 };
 
