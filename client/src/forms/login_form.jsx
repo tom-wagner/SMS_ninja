@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { handleLogin, changeView } from '../actions/index.js';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { toastr } from 'react-redux-toastr';
 
 class LoginForm extends Component {
   render() {
@@ -60,23 +61,15 @@ const mapDispatchToProps = (dispatch) => {
         url: '/login',
         data: { username, password }
       }).then(response => {
-        let phoneNumber = response.data[0];
-        let messages = response.data[1];
-        dispatch(handleLogin(username, password, phoneNumber, messages));
+        let phoneNumber = response.data;
+        dispatch(handleLogin(username, password, phoneNumber));
         dispatch(changeView('main'));
       }).catch(err => {
-        console.log(err);
+        toastr.error('Error: ', err);
       });
     }
   };
 };
-
-// USE LATER IF NEEDED ---> flip null back to mapStateToProps within connect() below
-// const mapStateToProps = (state) => {
-//   return {
-
-//   }
-// }
 
 LoginForm = connect(null, mapDispatchToProps)(LoginForm);
 

@@ -14,14 +14,12 @@ if (!process.env.twilioNumber) {
 var client = new twilio(acctSID, authToken);
 
 function sendSMS(msg, recipient, sender) {
-  console.log(msg, recipient, sender);
-
   return client.messages.create({
     body: msg,
     to: recipient,
     from: sender,
   });
-}
+};
 
 exports.sendSMS = sendSMS;
 exports.client = client;

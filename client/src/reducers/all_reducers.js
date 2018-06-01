@@ -20,8 +20,8 @@ export function username(state = '', action) {
       return '';
     default:
       return state;
-  }
-}
+  };
+};
 
 export function phoneNumber(state = '', action) {
   // LATER: LOOK UP PHONE NUMBER FROM DATABASE AT LOGIN
@@ -32,8 +32,8 @@ export function phoneNumber(state = '', action) {
       return '';
     default:
       return state;
-  }
-}
+  };
+};
 
 export function toggleLogIn(state = false, action) {
   switch (action.type) {
@@ -43,13 +43,12 @@ export function toggleLogIn(state = false, action) {
       return false;
     default:
       return state;
-  }
-}
+  };
+};
 
 export function scheduledMessages(state = [], action) {
   switch (action.type) {
     case UPDATED_MESSAGES:
-      console.log('action.payload: ', action.payload);
       return action.payload;
     case DID_LOG_OUT:
       return [];
@@ -57,8 +56,8 @@ export function scheduledMessages(state = [], action) {
       return [ ...state.slice(0, action.payload) , ...state.slice(action.payload + 1) ];
     default:
       return state;
-  }
-}
+  };
+};
 
 export function previouslySentMessages(state = [], action) {
   switch (action.type) {
@@ -66,8 +65,8 @@ export function previouslySentMessages(state = [], action) {
       return [];
     default:
       return state;
-  }
-}
+  };
+};
 
 export function view(state = 'login', action) {
   switch (action.type) {
@@ -81,5 +80,5 @@ export function view(state = 'login', action) {
       return action.view;
     default:
       return state;
-  }
-}
+  };
+};

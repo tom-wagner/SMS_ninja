@@ -39,7 +39,7 @@ function addMessage(msgDetails, callback) {
       callback(null, 'success!');
     }
   });
-}
+};
 
 function addUser(userDetails, callback) {
   User.create(userDetails, err => {
@@ -49,57 +49,56 @@ function addUser(userDetails, callback) {
       callback(null, 'success!');
     }
   });
-}
+};
 
 function retrieveUserMessages(username, callback) {
-  Message.find({ username: username }, (err, docs) => {
+  let currTime = Date.now();
+  Message.find({ username }).where('dateTime').gte(currTime).sort({ dateTime: 1 }).exec((err, docs) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, docs);
     }
   });
-}
+};
 
 function retrieveUserPhoneNumber(username, callback) {
-  User.findOne({username: username}, (err, docs) => {
+  User.findOne({ username }, (err, docs) => {
     if (err) {
       callback(err, null);
     } else {
       callback(err, docs);
     }
   });
-}
+};
 
 function retrieveUserHash(username, callback) {
   // need to update to only send back hashed password in response to query
-  User.findOne({username: username}, (err, docs) => {
+  User.findOne({ username }, (err, docs) => {
     if (err) {
       callback(err, null);
     } else {
       callback(null, docs.hashedPassword);
     }
   });
-}
+};
 
 function retrieveMessagesToSend(date) {
   // added an extra second to address Date.now() rounding issues
   // messages will not be accidentally sent twice as they are deleted once sent
   let minDate = date - 31000;
   let maxDate = date + 31000;
-  console.log('min and max: ', { minDate, maxDate });
   return Message.find({ dateTime: {$gt: minDate, $lt: maxDate }}).exec();
-}
+};
 
 function deleteSentMessages(messages) {
   let messageIDs = messages.map(msg => msg._id);
-  console.log('messageIDs to be deleted: ', messageIDs);
   return Message.deleteMany({ _id: { $in: messageIDs }}).exec();
-}
+};
 
 function deleteMessage(_id) {
   return Message.deleteOne({ _id });
-}
+};
 
 exports.addMessage = addMessage;
 exports.addUser = addUser;

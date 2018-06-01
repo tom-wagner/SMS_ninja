@@ -44,9 +44,6 @@ app.post('/SMS', function(req, res) {
 });
 
 app.post('/newUser', function(req, res) {
-  // toDoLater! -- check if username and emails are already in the database
-  // show the user real-time whether username is available
-
   let userDetails = req.body;
 
   bcrypt.hash(userDetails.password, 10, (err, hash) => {
@@ -72,7 +69,7 @@ app.post('/newUser', function(req, res) {
 app.post('/login', function (req, res) {
   DB.retrieveUserHash(req.body.username, (err, hashedPassword) => {
     if (err) {
-      res.status(500).send(err);
+      res.status(500).send('User does not exist. Please try again.');
     } else {
       bcrypt.compare(req.body.password, hashedPassword, (err, success) => {
         if (err) {
@@ -86,16 +83,11 @@ app.post('/login', function (req, res) {
         if (success) {
           DB.retrieveUserPhoneNumber(req.body.username, (err, docs) => {
             if (err) {
-              res.status(500).send(err);
+              res.status(500).send('Error retrieving user phone number.');
             } else {
               let phoneNumber = docs.phoneNumber;
-              DB.retrieveUserMessages(req.body.username, (err, docs) => {
-                if (err) {
-                  res.status(500).send(err);
-                } else {
-                  res.status(200).send([phoneNumber, docs]);
-                }
-              });
+              console.log({ phoneNumber });
+              res.status(200).send(docs.phoneNumber);
             }
           });
         }
@@ -115,16 +107,9 @@ app.get('/messages', function (req, res) {
 });
 
 app.delete('/message', function (req, res) {
-  console.log({ req });
   DB.deleteMessage(req.query._id)
-    .then(result => {
-      console.log({ result });
-      res.status(200).send('success!');
-    })
-    .catch(err => {
-      console.log({ err });
-      res.status(200).send('error!');
-    });
+    .then(result => res.status(200).send('success!'))
+    .catch(err => res.status(200).send('error!'));
 });
 
 app.listen(process.env.PORT || 3000, function() {

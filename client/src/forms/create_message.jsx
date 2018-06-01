@@ -6,10 +6,6 @@ import axios from 'axios';
 import { toastr } from 'react-redux-toastr';
 
 class CreateMessageForm extends Component {
-  componentDidMount() {
-    this.props.getMessages(this.props.username)
-  }
-
   render() {
     const {
       error,
@@ -131,13 +127,11 @@ const mapDispatchToProps = (dispatch, state) => {
       axios
         .get('/messages', { params: { username }})
         .then(messages => {
-          console.log({ messages });
           dispatch(updateMessages(messages.data));
         })
         .catch(err => {
-          // rudimentary error handling:
           console.log({ err });
-          window.alert('Unable to fetch scheduled messages, please try again later.');
+          toastr.error('Error: ', 'Unable to fetch scheduled messages, please try again later.');
         })
     },
   };
@@ -145,11 +139,6 @@ const mapDispatchToProps = (dispatch, state) => {
 
 CreateMessageForm = reduxForm({
   form: 'CreateMessageForm',
-  // initialValues: {
-    // dateTime: new Date(),
-  // }
-  /*validationFunction*/
-  /*warningFunction*/
 })(CreateMessageForm);
 
 const selector = formValueSelector('CreateMessageForm');

@@ -9,7 +9,7 @@ export default combineReducers({
   isLoggedIn: toggleLogIn,
   scheduledMessages,
   previouslySentMessages,
-  view, // DONE
-  form: reduxFormReducer, // DONE
+  view,
+  form: reduxFormReducer,
   toastr: toastrReducer,
 });

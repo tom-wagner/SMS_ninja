@@ -4,12 +4,9 @@ import { connect } from 'react-redux';
 import { deleteMessage, updateMessages } from '../actions/index.js';
 import moment from 'moment';
 import axios from 'axios';
+import { toastr } from 'react-redux-toastr';
 
 class Messages extends Component {
-  componentDidMount() {
-    console.log('t.p: ', this.props);
-  }
-
   render() {
     return (
       <div>
@@ -51,10 +48,6 @@ const mapStateToProps = (state) => {
   return {
     scheduledMessages: state.scheduledMessages,
     username: state.username,
-    // phoneNumber: state.phoneNumber,
-    // isLoggedIn: state.isLoggedIn,
-    // previouslySentMessages: state.previouslySentMessages,
-    // view: state.view,
   };
 };
 
@@ -68,8 +61,8 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(deleteMessage(idx));
         })
         .catch(err => {
-          // rudimentary error handling:
-          window.alert('Error deleting message from the database, please try again.')
+          console.log({ err });
+          toastr.error('Error: ', 'Error deleting message from the database, please try again.')
         });
     },
     getMessages: (username) => {
@@ -79,9 +72,8 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(updateMessages(messages.data));
         })
         .catch(err => {
-          // rudimentary error handling:
           console.log({ err });
-          window.alert('Unable to fetch scheduled messages, please try again later.');
+          toastr.error('Error: ', 'Unable to fetch scheduled messages, please try again later.');
         })
     },
   };

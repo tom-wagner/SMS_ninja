@@ -18,9 +18,7 @@ const email = value => {
   return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email address' : undefined;
 };
 
-
 // password requirements:
-
 const atLeastOneUpperCaseLetter = value => value && !/^(?=.*[A-Z])/.test(value) ? 'Password must contain at least one uppercase letter' : undefined;
 
 const atLeastOneLowerCaseLetter = value => value && !/^(?=.*[a-z])/.test(value) ? 'Password must contain at least one lowercase letter' : undefined;

@@ -47,18 +47,10 @@ export const handleSignUp = (values) => {
   };
 };
 
-export const handleLogin = (username, password, phoneNumber, messages) => {
-  // TO DO LATER:
-  // authenticate user
-  // fetch their scheduled messages
-  // set up session
-  // store phone number in state
-
-  // To do now:
-  // flip isLoggedIn to true
+export const handleLogin = (username, password, phoneNumber) => {
   return {
     type: DID_LOG_IN,
-    payload: { username, password, phoneNumber, messages },
+    payload: { username, password, phoneNumber },
   };
 };
 

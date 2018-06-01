@@ -23,12 +23,6 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     handleSignUp: (values) => {
@@ -36,18 +30,14 @@ const mapDispatchToProps = (dispatch) => {
       var options = { method: 'post', url: '/newUser', data: { username, email, phoneNumber, password }}
 
       axios(options)
-        .then(result => toastr.success('Sign up successful!', 'Log in to begin sending and scheduling messages'))
+        .then(result => {
+          toastr.success('Sign up successful!', 'Log in to begin sending and scheduling messages');
+          dispatch(handleSignUp(values));
+          dispatch(changeView('login'));
+        })
         .catch(err => toastr.error('Serer error, please try again.'));
-      
-      dispatch(handleSignUp(values));
-      
-      // For now, just change the view:
-      dispatch(changeView('login'));
-
-      // LATER: Check availability of username in database
-      // LATER: Live validate inputs
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(SignUp);

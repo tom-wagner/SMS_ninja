@@ -7,7 +7,6 @@ import axios from 'axios';
 
 class Main extends Component {
   componentDidMount() {
-    console.log('t.p in Main: ', this.props);
     this.props.getMessages(this.props.username);
   }
 
