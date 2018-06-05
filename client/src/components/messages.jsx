@@ -14,7 +14,6 @@ class Messages extends Component {
           <Col xs={8} xsOffset={2}>
             <div className="messages-container">
               <h1 className="form-header">Scheduled Messages</h1><br/>
-              <h4 className="form-header">For user: {this.props.username}</h4>
               <div className = "msg-list">
                 {this.props.scheduledMessages.map((message, idx) => {
                   if (message.messageText) {
