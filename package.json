@@ -6,8 +6,9 @@
   "scripts": {
     "test": "",
     "react-dev": "webpack -d --watch",
+    "react-prod": "webpack -p --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "npm install -g && webpack && node server/index.js"
+    "start": "npm install -g && webpack -p && node server/index.js"
   },
   "repository": {
     "type": "git",
