@@ -36,6 +36,7 @@ function addMessage(msgDetails, callback) {
     if (err) {
       callback(err, null);
     } else {
+      console.log('message added successfully to DB!!');
       callback(null, 'success!');
     }
   });
@@ -57,6 +58,7 @@ function retrieveUserMessages(username, callback) {
     if (err) {
       callback(err, null);
     } else {
+      console.log('docs within retrieveUserMessages: ', docs);
       callback(null, docs);
     }
   });

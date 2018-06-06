@@ -34,6 +34,7 @@ export const deleteMessage = (idx) => {
 };
 
 export const updateMessages = (messages) => {
+  console.log('messages within updateMessages: ', messages);
   return {
     type: UPDATED_MESSAGES,
     payload: messages,

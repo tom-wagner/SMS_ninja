@@ -18,6 +18,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
 app.post('/SMS', function(req, res) {
+  console.log('req.body in POST /SMS: ', req.body);
   DB.addMessage(req.body, (err, success) => {
     if (err) {
       // Message not saved to DB but will be sent now anyways if user requested immediately delivery
@@ -97,6 +98,8 @@ app.post('/login', function (req, res) {
 });
 
 app.get('/messages', function (req, res) {
+  console.log('req.query in GET /messages: ', req.query);
+
   DB.retrieveUserMessages(req.query.username, (err, messages) => {
     if (err) {
       res.status(500).send(err);

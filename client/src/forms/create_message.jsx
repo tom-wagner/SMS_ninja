@@ -18,6 +18,8 @@ class CreateMessageForm extends Component {
       shouldSendNow
     } = this.props;
 
+    console.log('this.props within createMessageForm: ', this.props);
+
     return (
       <div className="form-container">
         <h1 className="form-header">Schedule or Send a Message</h1>
@@ -109,14 +111,21 @@ const mapDispatchToProps = (dispatch, state) => {
       const { dateTime, messageText, recipient, sendTime } = values;
       const { username, reset, form } = props;
 
+      console.log('data after schedule message submit: ', { username, messageText, dateTime, sendTime });
+
       axios({ method: 'post', url: '/SMS', data: { username, messageText, recipient, dateTime, sendTime }})
         .then(resp => {
           dispatch(reset(form));
           toastr.success(resp.data);
+
+          console.log('response after schedule message submit: ', resp);
           
           axios
             .get('/messages', { params: { username } })
-            .then(messages => dispatch(updateMessages(messages.data)))
+            .then(messages => {
+              console.log('messages after getting /messages within create_message: ', messages);
+              dispatch(updateMessages(messages.data))
+            });
         })
         .catch(err => {
           console.log({ err });
@@ -127,6 +136,7 @@ const mapDispatchToProps = (dispatch, state) => {
       axios
         .get('/messages', { params: { username }})
         .then(messages => {
+          console.log('messages after getting /messages within create_message: ', messages);
           dispatch(updateMessages(messages.data));
         })
         .catch(err => {

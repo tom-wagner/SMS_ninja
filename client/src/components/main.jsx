@@ -36,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
       axios
         .get('/messages', { params: { username }})
         .then(messages => {
+          console.log('messages after getting messages in main.jsx: ', messages);
           dispatch(updateMessages(messages.data));
         })
         .catch(err => {

@@ -5,7 +5,7 @@ var CRON = require('cron');
 if (!process.env.twilioNumber) {
   var { acctSID, authToken, testSID, testToken, twilioNumber } = require('../config.js');
 } else {
-  var twilioNumber = process.env.twilioNumber || twilioNumber;
+  // set above variables from process.env._________;
 }
 
 var twilio = require('twilio')(acctSID, authToken);
@@ -39,8 +39,8 @@ let timer = new CRON.CronJob({
   onTick: () => {
     fetchMessages()
       .then(messages => {
-        messagesToDelete = messages;
         console.log('mtd: ', messagesToDelete)
+        messagesToDelete = messages;
         sendMessages(messages)
       })
       .then(() => deleteMessages(messagesToDelete))

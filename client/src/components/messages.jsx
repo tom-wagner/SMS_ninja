@@ -8,6 +8,8 @@ import { toastr } from 'react-redux-toastr';
 
 class Messages extends Component {
   render() {
+    console.log('this.props within messages.jsx: ', this.props);
+
     return (
       <div>
         <Row className="show-grid">
@@ -73,7 +75,7 @@ const mapDispatchToProps = (dispatch) => {
         .catch(err => {
           console.log({ err });
           toastr.error('Error: ', 'Unable to fetch scheduled messages, please try again later.');
-        })
+        });
     },
   };
 };

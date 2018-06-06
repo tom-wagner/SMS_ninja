@@ -49,6 +49,7 @@ export function toggleLogIn(state = false, action) {
 export function scheduledMessages(state = [], action) {
   switch (action.type) {
     case UPDATED_MESSAGES:
+      console.log('action.payload within scheduledMessages reducer: ', action.payload);
       return action.payload;
     case DID_LOG_OUT:
       return [];
