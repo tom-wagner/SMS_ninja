@@ -20,7 +20,9 @@ class Messages extends Component {
                 {this.props.scheduledMessages.map((message, idx) => {
                   if (message.messageText) {
                     let styledNumber = '(' + message.recipient.slice(0, 3) + ') ' + message.recipient.slice(3, 6) + ' - ' + message.recipient.slice(6);
-                    let date = moment(message.dateTime).format('MMMM Do YYYY, h:mm a');
+                    console.log('typeof message.dateTime: ', typeof message.dateTime);
+                    console.log('message.dateTime: ', message.dateTime);
+                    let date = moment(message.dateTime).add(4, 'h').format('MMMM Do YYYY, h:mm a');
                     return (
                       <div className="ind-msg" key={ message._id }>
                         <span className="message-line-item"><b>To: {styledNumber}</b></span>

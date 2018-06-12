@@ -115,6 +115,6 @@ app.delete('/message', function (req, res) {
     .catch(err => res.status(200).send('error!'));
 });
 
-app.listen(process.env.PORT || 3000, function() {
-  console.log('listening on port: ', process.env.PORT || 3000);
+app.listen(process.env.PORT || 8080, function() {
+  console.log('listening on port: ', process.env.PORT || 8080);
 });

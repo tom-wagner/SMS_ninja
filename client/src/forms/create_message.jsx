@@ -108,8 +108,9 @@ const renderField = ({ className, input, label, type, meta: { touched, error } }
 const mapDispatchToProps = (dispatch, state) => {
   return {
     handleScheduleMessageSubmit: (values, props) => {
-      const { dateTime, messageText, recipient, sendTime } = values;
-      const { username, reset, form } = props;
+      let { dateTime, messageText, recipient, sendTime } = values;
+      let { username, reset, form } = props;
+
 
       console.log('data after schedule message submit: ', { username, messageText, dateTime, sendTime });
 

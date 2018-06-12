@@ -54,6 +54,8 @@ function addUser(userDetails, callback) {
 
 function retrieveUserMessages(username, callback) {
   let currTime = Date.now();
+  currTime -= 14400000;
+  console.log({ currTime });
   Message.find({ username }).where('dateTime').gte(currTime).sort({ dateTime: 1 }).exec((err, docs) => {
     if (err) {
       callback(err, null);
@@ -90,6 +92,8 @@ function retrieveMessagesToSend(date) {
   // messages will not be accidentally sent twice as they are deleted once sent
   let minDate = date - 31000;
   let maxDate = date + 31000;
+  minDate -= 14400000;
+  maxDate -= 14400000;
   return Message.find({ dateTime: {$gt: minDate, $lt: maxDate }}).exec();
 };
 
